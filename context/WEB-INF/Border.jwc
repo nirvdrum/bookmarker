@@ -22,7 +22,7 @@
     
     <component id="treeView" type="contrib:TreeView">
         <!--binding name="sessionStateManager" expression='sessionStateManager'/-->
-        <binding name="treeModel" expression='page.treeModel'/>
+        <binding name="treeModel" expression='page.visit.treeModel'/>
         <binding name="treeStateListener" expression='page'/>
     </component>
     

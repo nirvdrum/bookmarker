@@ -6,14 +6,12 @@
  */
 package net.negativetwenty.bookmarker;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import net.negativetwenty.bookmarker.models.Category;
 
 import org.apache.tapestry.*;
 import org.apache.tapestry.contrib.tree.model.*;
-import org.apache.tapestry.contrib.tree.simple.*;
 import org.apache.tapestry.event.*;
 import org.apache.tapestry.html.BasePage;
 import org.objectstyle.cayenne.access.DataContext;
@@ -34,7 +32,7 @@ public class ApplicationPage extends BasePage implements PageRenderListener, ITr
      */
     protected DataContext getDataContext() 
     {
-        Visit visit = (Visit) getPage().getVisit();
+        Visit visit = (Visit) getVisit();
         return visit.getDataContext();
     }
 
@@ -45,34 +43,11 @@ public class ApplicationPage extends BasePage implements PageRenderListener, ITr
      * allowing subclasses to perform proper initialization.
      */
     public void pageBeginRender(PageEvent event) {}
-    
-	public ITreeModel getTreeModel()
-	{
-	    if (treeModel == null)
-	    {
-	        SelectQuery query = new SelectQuery(Category.class);
-	        query.addPrefetch("bookmarks");
-			
-	        List categories = getDataContext().performQuery(query); 
-		    
-	        TreeNode rootNode = new TestTreeNode("Bookmarks");
-	        Iterator it = categories.iterator();
-	        while (it.hasNext())
-	        {
-	            Category c = (Category) it.next();
-	            rootNode.insert(new TestTreeNode(c.getName()));
-	        }
-			
-	        ITreeDataModel treeDataModel = new SimpleTreeDataModel(rootNode);
-	        treeModel = new SimpleTreeModel(treeDataModel, new SimpleTreeStateModel());
-	    }
-	    
-	    return treeModel;
-	}
 	
 	public void treeStateChanged(TreeStateEvent tse)
 	{
-	    TestTreeNode node = (TestTreeNode) getTreeModel().getTreeDataModel().getObject(tse.getTreeStateModel().getSelectedNode());
+	    Visit v = (Visit) getVisit();
+	    TestTreeNode node = (TestTreeNode) v.getTreeModel().getTreeDataModel().getObject(tse.getTreeStateModel().getSelectedNode());
     
 		SelectQuery query = new SelectQuery(Category.class);
 		query.addPrefetch("bookmarks");
@@ -86,7 +61,6 @@ public class ApplicationPage extends BasePage implements PageRenderListener, ITr
 		    
 		    if (c.getName().equals(node.getValue()))
 		    {
-		        Visit v = (Visit) getVisit();
 		        v.setBookmarks(c.getBookmarks());
 		        v.setCategory(c);
 		        
