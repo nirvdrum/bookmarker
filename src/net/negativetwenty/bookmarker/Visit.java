@@ -19,6 +19,7 @@ import org.apache.tapestry.contrib.tree.simple.TreeNode;
 
 import org.objectstyle.cayenne.access.DataContext;
 import org.objectstyle.cayenne.conf.Configuration;
+import org.objectstyle.cayenne.exp.*;
 import org.objectstyle.cayenne.query.SelectQuery;
 
 public class Visit implements Serializable 
@@ -44,17 +45,19 @@ public class Visit implements Serializable
 	{
 	    if (treeModel == null)
 	    {
-	        SelectQuery query = new SelectQuery(Category.class);
-	        query.addPrefetch("bookmarks");
+	        Expression exp = ExpressionFactory.matchExp("parent", null);
+	        SelectQuery query = new SelectQuery(Category.class, exp);
 			
 	        List categories = getDataContext().performQuery(query); 
-		    
 	        TreeNode rootNode = new TestTreeNode("Bookmarks");
+	        
 	        Iterator it = categories.iterator();
 	        while (it.hasNext())
 	        {
 	            Category c = (Category) it.next();
-	            rootNode.insert(new TestTreeNode(c.getName()));
+	            TestTreeNode node = new TestTreeNode(c.getName()); 
+	            buildTree(c, node);
+	            rootNode.insert(node);
 	        }
 			
 	        ITreeDataModel treeDataModel = new SimpleTreeDataModel(rootNode);
@@ -62,6 +65,18 @@ public class Visit implements Serializable
 	    }
 	    
 	    return treeModel;
+	}
+	
+	protected void buildTree(Category parent, TreeNode root)
+	{
+	    Iterator it = parent.getChildren().iterator();
+	    while (it.hasNext())
+	    {
+	        Category c = (Category) it.next();
+	        TestTreeNode node = new TestTreeNode(c.getName());
+	        buildTree(c, node);
+	        root.insert(node);
+	    }
 	}
 	
     /**
