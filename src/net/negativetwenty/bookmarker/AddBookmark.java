@@ -31,9 +31,9 @@ import org.apache.tapestry.form.IPropertySelectionModel;
 import org.objectstyle.cayenne.access.DataContext;
 import org.objectstyle.cayenne.query.SelectQuery;
 
-//import de.nava.informa.core.*;
-//import de.nava.informa.impl.basic.*;
-//import de.nava.informa.exporters.*;
+import de.nava.informa.core.*;
+import de.nava.informa.impl.basic.*;
+import de.nava.informa.exporters.*;
 
 /**
  * Controls adding a new bookmark to the database.
@@ -134,9 +134,9 @@ public abstract class AddBookmark extends SecureApplicationPage
 	 */
 	public void createRdf()
 	{
-	    /*
-	    // Get a list of all the bookmarks.
+	    // Get a list of all the bookmarks, sorted by title.
         final SelectQuery query = new SelectQuery(Bookmark.class);
+        query.addOrdering(Bookmark.TITLE_PROPERTY, true);
         final List bookmarks = getDataContext().performQuery(query);
         final Visit v = (Visit) getVisit();
 	    
@@ -181,6 +181,6 @@ public abstract class AddBookmark extends SecureApplicationPage
 	    catch (final Exception e)
 	    {
 	        e.printStackTrace();
-	    }*/
+	    }
 	}
 }
