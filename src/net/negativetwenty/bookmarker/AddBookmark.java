@@ -86,12 +86,24 @@ public abstract class AddBookmark extends SecureApplicationPage
 	        {
 	            Bookmark b = (Bookmark) it.next();
 	            
-	            channel.addItem(new Item(b.getTitle(), b.getDescription(), new URL(b.getUrl())));
+	            Item item = new Item(b.getTitle(), b.getDescription(), new URL(b.getUrl()));
+	            
+	            // TODO When I finally force Bookmarks to have some category, the category name should never be null.
+	            if (b.getCategory() != null)
+	            {
+	                CategoryIF category = new de.nava.informa.impl.basic.Category(b.getCategory().getName());
+	                channel.addCategory(category);
+	                item.addCategory(category);
+	            }
+	            
+	            // TODO Update this to whatever the logged in username is.
+	            item.setCreator("nirvdrum");
+	            
+	            channel.addItem(item);
 	        }
 
 	        String rdffile = getRequestCycle().getRequestContext().getServlet().getServletContext().getRealPath(getComponent("border").getAsset("rdffile").getResourceLocation().getPath());
-	        ChannelExporterIF exporter = new RSS_1_0_Exporter(rdffile);
-//	        assuming you have a ChannelIF object available as channel
+	        ChannelExporterIF exporter = new RSS_2_0_Exporter(rdffile);
 	        exporter.write(channel);
 	    }
 	    catch (Exception e)
