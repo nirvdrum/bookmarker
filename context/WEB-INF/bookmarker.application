@@ -23,6 +23,8 @@
     <page name="AddBookmark" specification-path="pages/AddBookmark.page"/>
 	<page name="AddCategory" specification-path="pages/AddCategory.page"/>
     <page name="ViewBookmarks" specification-path="pages/ViewBookmarks.page"/>
+    <page name="Login" specification-path="pages/Login.page"/>
+    <page name="UserAdmin" specification-path="pages/UserAdmin.page"/>
     
     <library id="contrib" specification-path="/org/apache/tapestry/contrib/Contrib.library"/>
 	<library id="exception" specification-path="/contrib/tapestry/exception/Exception.library"/>
