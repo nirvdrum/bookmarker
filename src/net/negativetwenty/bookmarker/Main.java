@@ -19,6 +19,10 @@
  */
 package net.negativetwenty.bookmarker;
 
+import java.awt.event.*;
+import javax.swing.*;
+import org.jdesktop.jdic.tray.*;
+
 import org.mortbay.jetty.*;
 import org.mortbay.http.ajp.*;
 import org.mortbay.util.*;
@@ -32,15 +36,17 @@ import org.mortbay.util.*;
 public class Main
 {
     public static void main(String[] args)
-    {           
+    {   
         final Server servletServer = new Server();
-        
+
         try
         {
             servletServer.addListener(new InetAddrPort("127.0.0.1", 8080));
             servletServer.addListener(new AJP13Listener(new InetAddrPort("127.0.0.1", 8009)));
             servletServer.addWebApplication("/bookmarker", "bookmarker");
             servletServer.start();
+            
+            final SysTray st = new SysTray(servletServer);
         }
         catch (Exception e)
         {

@@ -11,6 +11,7 @@
 	<property name="lib-standalone.dir" value="lib-standalone"/>
 	<property name="src.dir" value="src"/>
 	<property name="cayenne.dir" value="${src.dir}/net/negativetwenty/bookmarker/models"/>
+	<property name="image.dir" value="images"/>
 	
 	<!-- Temporary build directories -->
 	<property name="build.dir" value="build"/>
@@ -74,7 +75,7 @@
 			<fileset dir="${context.dir}">
 				<exclude name="**/WEB-INF/web.xml"/>
 			</fileset>
-			<classes dir="${build.classes}" excludes="**/Main.class"/>
+			<classes dir="${build.classes}" excludes="**/Main*.class,**/SysTray*.class"/>
 			<lib dir="${lib.dir}" excludes="collectpages.jar"/>
 		</war>
 	</target>
@@ -91,6 +92,7 @@
 		<mkdir dir="${standalone.dir}/${standalone-db.dir}"/>
 		<mkdir dir="${standalone.dir}/lib"/>
 		<mkdir dir="${standalone.dir}/bookmarker"/>
+		<mkdir dir="${standalone.dir}/images"/>
 		
 		<!-- Get all the libs the standalone app requires. -->
 		<copy todir="${standalone.dir}/${standalone-db.dir}">
@@ -103,13 +105,18 @@
 		
 		<unjar dest="${standalone.dir}/bookmarker/" src="${build.dir}/bookmarker.war"/>
 		
+		<copy todir="${standalone.dir}/images">
+			<fileset dir="${image.dir}"/>
+		</copy>
+		
 		<!-- Build the main jar file. -->
 		<jar destfile="${standalone.dir}/bookmarker.jar">
 			<fileset dir="${build.classes}">
-				<include name="**/Main.class"/>
+				<include name="**/Main*.class"/>
+				<include name="**/SysTray*.class"/>
 			</fileset>
 			<manifest>
-				<attribute name="Class-Path" value="lib/org.mortbay.jetty.jar lib/javax.servlet.jar lib/jasper-compiler.jar lib/jasper-runtime.jar"/>
+				<attribute name="Class-Path" value="lib/org.mortbay.jetty.jar lib/javax.servlet.jar lib/jasper-compiler.jar lib/jasper-runtime.jar lib/jdic.jar"/>
 				<attribute name="Main-Class" value="net.negativetwenty.bookmarker.Main" />
 			</manifest>
 		</jar>
