@@ -31,7 +31,7 @@
        <message-binding name="displayName" key="title"/>
        <binding name="validator" expression="beans.required"/>
        <binding name="value" expression="bookmark.title"/>
-   </component>   
+   </component>
    
    <component id="url" type="ValidField">
        <message-binding name="displayName" key="url"/>

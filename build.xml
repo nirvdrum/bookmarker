@@ -104,7 +104,7 @@
 		<unjar dest="${standalone.dir}/bookmarker/" src="${build.dir}/bookmarker.war"/>
 		
 		<!-- Build the main jar file. -->
-		<jar destfile="${build.dir}/standalone/bookmarker.jar">
+		<jar destfile="${standalone.dir}/bookmarker.jar">
 			<fileset dir="${build.classes}">
 				<include name="**/Main.class"/>
 			</fileset>

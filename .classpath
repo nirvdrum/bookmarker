@@ -17,7 +17,7 @@
 	<classpathentry kind="lib" path="lib-standalone/jasper-runtime.jar"/>
 	<classpathentry kind="lib" path="lib-standalone/jasper-compiler.jar"/>
 	<classpathentry sourcepath="/cayenne" kind="lib" path="lib/cayenne.jar"/>
-	<classpathentry sourcepath="/Users/nirvdrum/tmp/Tapestry-3.0.1/framework/src" kind="lib" path="lib/tapestry-3.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/tapestry-contrib-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/tapestry-contrib-3.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/tapestry-3.0.2.jar"/>
 	<classpathentry kind="output" path="context/WEB-INF/classes"/>
 </classpath>
