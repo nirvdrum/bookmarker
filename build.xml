@@ -48,7 +48,7 @@
 			<fileset dir="${context.dir}">
 				<exclude name="**/WEB-INF/web.xml"/>
 			</fileset>
-			<classes dir="${build.classes}"/>
+			<classes dir="${build.classes}" file="${context.dir}/log4j.properties"/>
 			<lib dir="${lib.dir}">
 				<exclude name="**/servlet-api.jar"/>
 			</lib>

@@ -30,6 +30,14 @@ public abstract class ViewBookmarks extends ApplicationPage
 
         throw new RedirectException(b.getUrl());
     }
+
+    public void removeBookmark(IRequestCycle cycle)
+    {
+        Visit v = (Visit) getVisit();
+        ObjectId id = (ObjectId) cycle.getServiceParameters()[0];
+        Bookmark b = (Bookmark) DataObjectUtils.objectForPK(getDataContext(), id);
+        v.removeBookmark(b);
+    }
     
     public void pageBeginRender(PageEvent event) 
     {

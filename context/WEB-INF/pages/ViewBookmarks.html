@@ -9,7 +9,7 @@
          <h4>
              <a href="#" jwcid="bookmarkLink@DirectLink" listener="ognl:listeners.linkClicked" parameters="ognl:bookmark.objectId"><span jwcid="bookmarkLinkText@InsertText" value="ognl:bookmark.title"/></a>
              <span jwcid="isAdmin@Conditional" condition="ognl:visit.loggedIn">
-                 [<i><a href="#">Modify</a></i> | <i><a href="#">Remove</a></i>]
+                 [<i><a href="#">Modify</a></i> | <i><a href="#" jwcid="removeLink@DirectLink" listener="ognl:listeners.removeBookmark" parameters="ognl:bookmark.objectId">Remove</a></i>]
              </span>
          </h4>
          <span jwcid="description@InsertText" value="ognl:bookmark.description"/>

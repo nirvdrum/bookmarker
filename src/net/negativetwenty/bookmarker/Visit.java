@@ -80,7 +80,7 @@ public class Visit implements Serializable
 	        ITreeDataModel treeDataModel = new SimpleTreeDataModel(rootNode);
 	        treeModel = new SimpleTreeModel(treeDataModel, new SimpleTreeStateModel());
 	    }
-	    
+
 	    return treeModel;
 	}
 	
@@ -123,5 +123,12 @@ public class Visit implements Serializable
     public void setCategory(Category category)
     {
         this.category = category;
+    }
+    
+    public void removeBookmark(Bookmark b)
+    {
+        bookmarks.remove(b);
+        dataContext.deleteObject(b);
+        dataContext.commitChanges();
     }
 }
