@@ -51,14 +51,8 @@ public class Visit implements Serializable
 	        List categories = getDataContext().performQuery(query); 
 	        TreeNode rootNode = new TestTreeNode("Bookmarks");
 	        
-	        Iterator it = categories.iterator();
-	        while (it.hasNext())
-	        {
-	            Category c = (Category) it.next();
-	            TestTreeNode node = new TestTreeNode(c.getName()); 
-	            buildTree(c, node);
-	            rootNode.insert(node);
-	        }
+
+	        buildTree(categories, rootNode);
 			
 	        ITreeDataModel treeDataModel = new SimpleTreeDataModel(rootNode);
 	        treeModel = new SimpleTreeModel(treeDataModel, new SimpleTreeStateModel());
@@ -67,14 +61,14 @@ public class Visit implements Serializable
 	    return treeModel;
 	}
 	
-	protected void buildTree(Category parent, TreeNode root)
+	protected void buildTree(List children, TreeNode root)
 	{
-	    Iterator it = parent.getChildren().iterator();
+	    Iterator it = children.iterator();
 	    while (it.hasNext())
 	    {
 	        Category c = (Category) it.next();
 	        TestTreeNode node = new TestTreeNode(c.getName());
-	        buildTree(c, node);
+	        buildTree(c.getChildren(), node);
 	        root.insert(node);
 	    }
 	}
