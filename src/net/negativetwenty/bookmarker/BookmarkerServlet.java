@@ -32,8 +32,6 @@ import org.objectstyle.cayenne.conf.Configuration;
 
 public class BookmarkerServlet extends ApplicationServlet 
 {
-   // Server server = null;
-    
     /**
      * @see javax.servlet.Servlet#init(ServletConfig)
      */

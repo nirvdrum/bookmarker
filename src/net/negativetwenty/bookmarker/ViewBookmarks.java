@@ -36,7 +36,7 @@ import org.objectstyle.cayenne.access.*;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public abstract class ViewBookmarks extends ApplicationPage
+public class ViewBookmarks extends ApplicationPage
 {	
     public void linkClicked(IRequestCycle cycle)
     {
