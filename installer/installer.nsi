@@ -2,10 +2,10 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "Bookmarker"
-!define PRODUCT_VERSION "0.0.2"
+!define PRODUCT_VERSION "0.2.1"
 !define PRODUCT_PUBLISHER "NegativeTwenty"
 !define PRODUCT_WEB_SITE "http://www.negativetwenty.net/projects/bookmarker/"
-!define BOOKMARKER_HOME "http://localhost:8080/bookmarker/Home.html"
+!define BOOKMARKER_HOME "http://localhost:8080/Home.html"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\AppMainExe.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
@@ -97,6 +97,10 @@ Section "MainSection" SEC01
   SetOutPath "$INSTDIR\db"
   SetOverwrite ifnewer
   File "..\build\standalone\db\*"
+  
+  SetOutPath "$INSTDIR\images"
+  SetOverwrite ifnewer
+  File "..\build\standalone\images\*"
 
   SetOutPath "$INSTDIR\lib"
   SetOverwrite ifnewer
@@ -115,7 +119,7 @@ Section -AdditionalIcons
   WriteIniStr "$INSTDIR\${PRODUCT_PUBLISHER}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${BOOKMARKER_HOME}"
   SetOutPath "$INSTDIR"
-  CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\${PRODUCT_NAME}.lnk" "$2\bin\java.exe" "-jar bookmarker.jar"
+  CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\${PRODUCT_NAME}.lnk" "$2\bin\javaw.exe" "-jar bookmarker.jar"
   CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\My Bookmarks.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
   CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\${PRODUCT_PUBLISHER}.lnk" "$INSTDIR\${PRODUCT_PUBLISHER}.url"
   CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk" "$INSTDIR\uninst.exe"
