@@ -23,6 +23,7 @@
 package net.negativetwenty.bookmarker;
 
 import org.mortbay.jetty.*;
+import org.mortbay.http.ajp.*;
 import org.mortbay.util.*;
 
 /**
@@ -39,8 +40,8 @@ public class Main
         
         try
         {
-            System.err.println(servletServer.getConfiguration());
             servletServer.addListener(new InetAddrPort("127.0.0.1", 8080));
+            servletServer.addListener(new AJP13Listener(new InetAddrPort("127.0.0.1", 8009)));
             servletServer.addWebApplication("/", "bookmarker.war");
             servletServer.start();
         }
