@@ -42,7 +42,7 @@
 	</target>
 	
 	<target name="compile" depends="clean,init">
-		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="classpath"/>
+		<javac srcdir="${src.dir}" destdir="${build.classes}" classpathref="classpath"/>
 		<war destfile="${build.dir}/bookmarker.war" webxml="${context.dir}/WEB-INF/web.xml">
 			<fileset dir="${context.dir}">
 				<exclude name="**/WEB-INF/web.xml"/>

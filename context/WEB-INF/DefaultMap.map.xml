@@ -3,6 +3,7 @@
 	<property name="defaultPackage" value="net.negativetwenty.bookmarker.models"/>
 	<db-entity name="Bookmark">
 		<db-attribute name="category_id" type="INTEGER"/>
+		<db-attribute name="clickCount" type="INTEGER"/>
 		<db-attribute name="description" type="VARCHAR" length="255"/>
 		<db-attribute name="id" type="INTEGER" isPrimaryKey="true" isMandatory="true"/>
 		<db-attribute name="title" type="VARCHAR" isMandatory="true" length="255"/>
@@ -15,6 +16,7 @@
 		<db-attribute name="parent_id" type="INTEGER"/>
 	</db-entity>
 	<obj-entity name="Bookmark" className="net.negativetwenty.bookmarker.models.Bookmark" dbEntityName="Bookmark">
+		<obj-attribute name="clickCount" type="java.lang.Integer" db-attribute-path="clickCount"/>
 		<obj-attribute name="description" type="java.lang.String" db-attribute-path="description"/>
 		<obj-attribute name="title" type="java.lang.String" db-attribute-path="title"/>
 		<obj-attribute name="url" type="java.lang.String" db-attribute-path="url"/>

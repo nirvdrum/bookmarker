@@ -6,15 +6,12 @@
  */
 package net.negativetwenty.bookmarker;
 
-import java.util.*;
-
 import net.negativetwenty.bookmarker.models.*;
 
 import org.apache.tapestry.*;
-import org.apache.tapestry.event.PageEvent;
-import org.apache.tapestry.contrib.tree.model.*;
-import org.apache.tapestry.contrib.tree.simple.*;
-import org.objectstyle.cayenne.query.SelectQuery;
+import org.apache.tapestry.event.*;
+import org.objectstyle.cayenne.*;
+import org.objectstyle.cayenne.access.*;
 
 
 /**
@@ -25,7 +22,12 @@ import org.objectstyle.cayenne.query.SelectQuery;
  */
 public abstract class ViewBookmarks extends ApplicationPage
 {	
-	public void pageBeginRender(PageEvent event)
-	{
-	}
+    public void linkClicked(IRequestCycle cycle)
+    {
+        ObjectId id = (ObjectId) cycle.getServiceParameters()[0];
+        Bookmark b = (Bookmark) DataObjectUtils.objectForPK(getDataContext(), id);
+        b.addClick();
+
+        throw new RedirectException(b.getUrl());
+    }
 }

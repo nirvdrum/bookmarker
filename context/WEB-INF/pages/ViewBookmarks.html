@@ -6,12 +6,16 @@
    	 	<table border="1" class="box">
         	<tr class="boxHeader">
             	<th><span key="title">Title:</span></th>
-            	<td><a jwcid="title@GenericLink" href="ognl:bookmark.url"><span jwcid="@InsertText" value="ognl:bookmark.title"/></a></td>
+            	<td><a href="#" jwcid="title@DirectLink" listener="ognl:listeners.linkClicked" parameters="ognl:bookmark.objectId"><span jwcid="@InsertText" value="ognl:bookmark.title"/></a></td>
         	</tr>
         	<tr class="boxContent">
             	<th><span key="description">Description:</span></th>
             	<td><span jwcid="description@InsertText" value="ognl:bookmark.description"/></td>
         	</tr>
+         <tr class="boxContent">
+             <th><span key="clickCount">Click Count:</span></th>
+             <td><span jwcid="clickCount@Insert" value="ognl:bookmark.clickCount"/></td>
+         </tr>
     		</table>
     		<br/><br/>
     </span>	
