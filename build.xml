@@ -55,11 +55,12 @@
 	
 	<target name="compile" depends="clean,init">
 		<javac srcdir="${src.dir}" destdir="${build.classes}" classpathref="classpath" debug="true"/>
+		<copy todir="${build.classes}" file="${context.dir}/WEB-INF/log4j.properties"/>
 		<war destfile="${build.dir}/bookmarker.war" webxml="${context.dir}/WEB-INF/web.xml">
 			<fileset dir="${context.dir}">
 				<exclude name="**/WEB-INF/web.xml"/>
 			</fileset>
-			<classes dir="${build.classes}" file="${context.dir}/log4j.properties" excludes="**/Main.class"/>
+			<classes dir="${build.classes}" excludes="**/Main.class"/>
 			<lib dir="${lib.dir}"/>
 		</war>
 	</target>
