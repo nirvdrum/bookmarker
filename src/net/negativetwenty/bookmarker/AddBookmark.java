@@ -6,12 +6,21 @@
  */
 package net.negativetwenty.bookmarker;
 
-import net.negativetwenty.bookmarker.models.*;
+import java.net.*;
+import java.util.*;
+
+import net.negativetwenty.bookmarker.models.Bookmark;
+import net.negativetwenty.bookmarker.models.Category;
 
 import org.apache.tapestry.IRequestCycle;
 import org.apache.tapestry.event.PageEvent;
 import org.apache.tapestry.form.IPropertySelectionModel;
 import org.objectstyle.cayenne.access.DataContext;
+import org.objectstyle.cayenne.query.SelectQuery;
+
+import de.nava.informa.core.*;
+import de.nava.informa.impl.basic.*;
+import de.nava.informa.exporters.*;
 
 /**
  * @author nirvdrum
@@ -35,11 +44,14 @@ public abstract class AddBookmark extends SecureApplicationPage
 	{
 		DataContext dc = getDataContext();
 		Bookmark b = getBookmark();
+		b.setClickCount(new Integer(0));
 		
 		dc.registerNewObject(b);
 		b.setCategory(getCategory());
 		
 		dc.commitChanges();
+		
+		createRdf();
 		
 	    cycle.activate("Home");
 	}
@@ -55,5 +67,36 @@ public abstract class AddBookmark extends SecureApplicationPage
 		{
 			setCategory(new Category());
 		}
+	}
+	
+	public void createRdf()
+	{
+	    DataContext dc = getDataContext();
+        SelectQuery query = new SelectQuery(Bookmark.class);
+        List bookmarks = getDataContext().performQuery(query); 
+	    
+	    try
+	    {
+	        ChannelBuilderIF builder = new ChannelBuilder();
+	        ChannelIF channel = builder.createChannel("Bookmarks");
+	        channel.setDescription("Test Channel: " + "Bookmarks");
+	        
+	        Iterator it = bookmarks.iterator();
+	        while (it.hasNext())
+	        {
+	            Bookmark b = (Bookmark) it.next();
+	            
+	            channel.addItem(new Item(b.getTitle(), b.getDescription(), new URL(b.getUrl())));
+	        }
+
+	        String rdffile = getRequestCycle().getRequestContext().getServlet().getServletContext().getRealPath(getComponent("border").getAsset("rdffile").getResourceLocation().getPath());
+	        ChannelExporterIF exporter = new RSS_1_0_Exporter(rdffile);
+//	        assuming you have a ChannelIF object available as channel
+	        exporter.write(channel);
+	    }
+	    catch (Exception e)
+	    {
+	        e.printStackTrace();
+	    }
 	}
 }

@@ -1,9 +1,12 @@
 <html>
+<head>
+  <LINK REL="StyleSheet" HREF="../../css/root.css" TYPE="text/css">
+</head>
 <body jwcid="$content$">
 <span jwcid="@Border">
-
+    
     <span jwcid="bookmarks@Foreach" source="ognl:visit.bookmarks" value="ognl:bookmark">
-   	 	<table border="1" class="box">
+   	 	<table class="box">
         	<tr class="boxHeader">
             	<th><span key="title">Title:</span></th>
             	<td><a href="#" jwcid="title@DirectLink" listener="ognl:listeners.linkClicked" parameters="ognl:bookmark.objectId"><span jwcid="@InsertText" value="ognl:bookmark.title"/></a></td>

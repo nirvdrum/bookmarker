@@ -1,4 +1,5 @@
-<html jwcid="@Shell" title="Bookmarker" stylesheet="ognl:assets.stylesheet">
+<html jwcid="@Shell" title="Bookmarker" stylesheet="ognl:assets.stylesheet" delegate="ognl:beans.metaGenerator">
+<head>  <LINK REL="StyleSheet" HREF="../css/root.css" TYPE="text/css"></head>
 <body jwcid="@Body">
 
     <!-- Start Header -->
@@ -19,7 +20,7 @@
             <!-- End Menu Bar -->
             
             <!-- Start Main Content -->
-            <td>
+            <td id="mainContent">
 				<span jwcid="@RenderBody">
 				Template HTML goes here.
 				</span>
@@ -30,7 +31,7 @@
 
 	<!-- Start Footer -->
     <p>
-    <table width="100%" class="footer">
+    <table class="footer">
    		<tr>
       		<td class="boxHeader"><center><span key="footer" raw="true">Copyright <a href="http://www.negativetwenty.net/">NegativeTwenty</a>, 2004.</span></center></td>
    		</tr>

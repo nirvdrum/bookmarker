@@ -7,7 +7,10 @@
 <component-specification class="org.apache.tapestry.BaseComponent" allow-body="yes" allow-informal-parameters="yes">
 
     <context-asset name="stylesheet" path="css/root.css"/>
+    <context-asset name="rdffile" path="bookmarks.rdf"/>
 
+    <bean name="metaGenerator" class="net.negativetwenty.bookmarker.MetaGenerator"/>
+    
     <component id="treeData" type="contrib:TreeDataView">
         <binding name="treeView" expression='components.treeView'/>
         <binding name="value" expression='value'/>

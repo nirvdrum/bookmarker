@@ -37,7 +37,7 @@ A:active
 
 .box
 {
-
+	width: 70%;
 	border: 1px solid rgb(38, 112, 255);
 }
 
@@ -55,6 +55,17 @@ A:active
     border: 1px solid rgb(38, 112, 255);
 }
 
+td#mainContent
+{
+	position: relative;
+	left: 50%;
+	right: 50%;
+}
+
 .footer
 {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: auto;
 }
