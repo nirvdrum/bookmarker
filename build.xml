@@ -20,6 +20,20 @@
 	<!-- Global "magic" property for <javac> -->
 	<property name="build.compiler" value="modern"/>
 	
+	<!-- 3rd part tasks -->
+	<taskdef name="cdbgen" classname="org.objectstyle.cayenne.tools.DbGeneratorTask">
+	     <classpath refid="classpath"/>
+	</taskdef>
+	
+	<taskdef name="cgen" classname="org.objectstyle.cayenne.tools.CayenneGenerator">
+	     <classpath refid="classpath"/>
+	</taskdef>
+	
+	<taskdef name="collectpages" classname="org.mb.collectpages.Task">
+		<classpath refid="classpath"/>
+	</taskdef>
+	
+	
 	<path id="classpath">
 		<fileset dir="${lib.dir}">
 			<include name="*.jar"/>
@@ -34,15 +48,9 @@
 		<mkdir dir="${build.dir}"/>
 		<mkdir dir="${build.classes}"/>
 		<touch file="${context.dir}/bookmarks.rdf"/>
-		
-		<taskdef name="cgen" classname="org.objectstyle.cayenne.tools.CayenneGenerator">
-		     <classpath refid="classpath"/>
-		</taskdef>
-		<cgen map="${context.dir}/WEB-INF/DefaultMap.map.xml" destDir="${src.dir}" superpkg="net.negativetwenty.bookmarker.models.auto"/>
 	
-		<taskdef name="cdbgen" classname="org.objectstyle.cayenne.tools.DbGeneratorTask">
-		     <classpath refid="classpath"/>
-		</taskdef>
+		<cgen map="${context.dir}/WEB-INF/DefaultMap.map.xml" destDir="${src.dir}" superpkg="net.negativetwenty.bookmarker.models.auto"/>
+		
 		<cdbgen map="${context.dir}/WEB-INF/DefaultMap.map.xml" adapter="org.objectstyle.cayenne.dba.hsqldb.HSQLDBAdapter"
 			driver="org.hsqldb.jdbcDriver" url="jdbc:hsqldb:hsql://localhost/bookmarker" username="sa" password=""
 			startHsqldb="true" hsqldbProps="database.0=file:${db.dir}/bookmarker;dbname.0=bookmarker"/>
@@ -53,7 +61,13 @@
 		<delete file="${context.dir}/bookmarks.rdf"/>
 	</target>
 	
-	<target name="compile" depends="clean,init">
+	<target name="collect">
+		<collectpages application="${context.dir}/WEB-INF/bookmarker.application" updateExisting="yes" removeMissing="yes">
+			<fileset dir="${context.dir}"/>
+		</collectpages>
+	</target>
+	
+	<target name="compile" depends="clean,init,collect">
 		<javac srcdir="${src.dir}" destdir="${build.classes}" classpathref="classpath" debug="true"/>
 		<copy todir="${build.classes}" file="${context.dir}/WEB-INF/log4j.properties"/>
 		<war destfile="${build.dir}/bookmarker.war" webxml="${context.dir}/WEB-INF/web.xml">
@@ -61,7 +75,7 @@
 				<exclude name="**/WEB-INF/web.xml"/>
 			</fileset>
 			<classes dir="${build.classes}" excludes="**/Main.class"/>
-			<lib dir="${lib.dir}"/>
+			<lib dir="${lib.dir}" excludes="collectpages.jar"/>
 		</war>
 	</target>
 	
