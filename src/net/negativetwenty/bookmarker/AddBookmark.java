@@ -19,7 +19,7 @@ import org.objectstyle.cayenne.access.DataContext;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public abstract class AddBookmark extends ApplicationPage 
+public abstract class AddBookmark extends SecureApplicationPage 
 {
 	public abstract Bookmark getBookmark();
 	public abstract void setBookmark(Bookmark bookmark);

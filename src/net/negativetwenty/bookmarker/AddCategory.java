@@ -20,7 +20,7 @@ import org.objectstyle.cayenne.access.DataContext;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public abstract class AddCategory extends ApplicationPage implements PageRenderListener
+public abstract class AddCategory extends SecureApplicationPage implements PageRenderListener
 {
 	public abstract Category getCategory();
 	public abstract void setCategory(Category category);

@@ -28,6 +28,7 @@ public class Visit implements Serializable
 	private ITreeModel treeModel = null;
 	private List bookmarks = null;
 	private Category category = null;
+	private boolean loggedIn = false;
 	
 	public Visit() 
 	{
@@ -39,6 +40,28 @@ public class Visit implements Serializable
 	public DataContext getDataContext() 
 	{
 		return dataContext;
+	}
+	
+	public boolean authenticate(String username, String password)
+	{
+	    String tempUser = "admin";
+	    String tempPass = "password";
+	    
+	    if (username.equals(tempUser) && password.equals(tempPass))
+	    {
+	        loggedIn = true;
+	    }
+	    else
+	    {
+	        loggedIn = false;
+	    }
+	    
+	    return loggedIn;
+	}
+	
+	public boolean isLoggedIn()
+	{
+	    return loggedIn;
 	}
 	
 	public ITreeModel getTreeModel()
