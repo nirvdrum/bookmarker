@@ -68,6 +68,11 @@ public class ViewBookmarks extends ApplicationPage
     public void pageBeginRender(PageEvent event) 
     {
         Visit v = (Visit) getVisit();
-        getComponent("border").setProperty("heading", v.getCategory().getName());
+        Category c = v.getCategory();
+        
+        if (c != null)
+        {
+            getComponent("border").setProperty("heading", c.getName());
+        }
     }
 }

@@ -42,7 +42,7 @@ public class Main
         {
             servletServer.addListener(new InetAddrPort("127.0.0.1", 8080));
             servletServer.addListener(new AJP13Listener(new InetAddrPort("127.0.0.1", 8009)));
-            servletServer.addWebApplication("/", "bookmarker.war");
+            servletServer.addWebApplication("/bookmarker", "bookmarker.war");
             servletServer.start();
         }
         catch (Exception e)
