@@ -16,9 +16,6 @@
 
 /*
  * Created on Oct 27, 2004
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 package net.negativetwenty.bookmarker;
 
@@ -27,10 +24,10 @@ import org.mortbay.http.ajp.*;
 import org.mortbay.util.*;
 
 /**
+ * This allows for Bookmarker to be used in standalone mode.  It starts up a local instance of Jetty to
+ * serve up the Bookmarker webapp.
+ * 
  * @author nirvdrum
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 public class Main
 {

@@ -40,7 +40,7 @@ import org.objectstyle.cayenne.query.SelectQuery;
 import org.objectstyle.cayenne.util.XMLEncoder;
 
 /**
- * TODO Briefly describe the class or interface. 
+ * Exports bookmarks from the database to an XML file.
  *
  * @author nirvdrum
  */
@@ -48,7 +48,7 @@ public class ExportService extends AbstractService
 {
     public static final String SERVICE_NAME = "bookmarker.export";
     
-    /* (non-Javadoc)
+    /**
      * @see org.apache.tapestry.engine.IEngineService#getName()
      */
     public String getName()
@@ -56,21 +56,24 @@ public class ExportService extends AbstractService
         return SERVICE_NAME;
     }
 
-    /* (non-Javadoc)
+    /**
      * @see org.apache.tapestry.engine.IEngineService#service(org.apache.tapestry.engine.IEngineServiceView, org.apache.tapestry.IRequestCycle, org.apache.tapestry.request.ResponseOutputStream)
      */
     public void service(IEngineServiceView engine, IRequestCycle cycle,
             ResponseOutputStream output) throws ServletException, IOException
     {
+        // Get all of the bookmarks in the database.
         final Visit v = (Visit) cycle.getEngine().getVisit(cycle);      
         final SelectQuery query = new SelectQuery(Bookmark.class);
         final List bookmarks = v.getDataContext().performQuery(query); 
 
+        // Encode the list of bookmarks to XML.
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         final XMLEncoder encoder = new XMLEncoder(new PrintWriter(out, true));
         encoder.encodeCollection("Bookmarks", bookmarks);
         encoder.getPrintWriter();
         
+        // Write the XML to the output stream sent to the web browser.
         //cycle.getRequestContext().getResponse().setHeader(
         //       "Content-Disposition",
         //        "attachment; filename=bookmarker_export.xml");
@@ -78,7 +81,7 @@ public class ExportService extends AbstractService
         output.write(out.toByteArray());
     }
 
-    /* (non-Javadoc)
+    /**
      * @see org.apache.tapestry.engine.IEngineService#getLink(org.apache.tapestry.IRequestCycle, org.apache.tapestry.IComponent, java.lang.Object[])
      */
     public ILink getLink(IRequestCycle cycle, IComponent component, Object[] parameters)

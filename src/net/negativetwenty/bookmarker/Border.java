@@ -16,9 +16,6 @@
 
 /*
  * Created on Oct 22, 2004
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 package net.negativetwenty.bookmarker;
 
@@ -26,13 +23,17 @@ import org.apache.tapestry.*;
 import org.apache.tapestry.callback.PageCallback;
 
 /**
+ * The Border class provides the logic for the Border component.
+ * 
  * @author nirvdrum
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 public class Border extends BaseComponent
 {
+    /**
+     * Login listener.  Records the current page being visited and redirects the user to the Login page.
+     * 
+     * @param cycle
+     */
     public void login(final IRequestCycle cycle)
     {
         final Login login = (Login) cycle.getPage("Login");
@@ -40,6 +41,11 @@ public class Border extends BaseComponent
         throw new PageRedirectException(login);
     }
     
+    /**
+     * Logout listener.  Logs a user out of the system.
+     * 
+     * @param cycle
+     */
     public void logout(final IRequestCycle cycle)
     {
         final Visit v = (Visit) getPage().getVisit();
@@ -47,6 +53,12 @@ public class Border extends BaseComponent
         cycle.activate("Home");
     }
     
+    /**
+     * AddBookmark listener.  Redirects the user to the AddBookmark page, making sure to clear any cached
+     * Bookmark values.
+     * 
+     * @param cycle
+     */
     public void addBookmark(final IRequestCycle cycle)
     {
         final AddBookmark ab = (AddBookmark) cycle.getPage("AddBookmark");

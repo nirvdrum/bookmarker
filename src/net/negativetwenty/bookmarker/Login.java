@@ -16,9 +16,6 @@
 
 /*
  * Created on Sep 28, 2004
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 package net.negativetwenty.bookmarker;
 
@@ -32,10 +29,9 @@ import org.objectstyle.cayenne.query.SelectQuery;
 import net.negativetwenty.bookmarker.models.*;
 
 /**
+ * Handles logging into the system.
+ * 
  * @author nirvdrum
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 public abstract class Login extends ApplicationPage
 {
@@ -44,6 +40,12 @@ public abstract class Login extends ApplicationPage
     
     protected ICallback callback = null;
     
+    /**
+     * Login listener.  Attempts to log the user in.  If a login is successful, the Visit object is updated
+     * to note this.
+     * 
+     * @param cycle
+     */
     public void login(final IRequestCycle cycle)
     {
         final Visit v = (Visit) getVisit();
@@ -88,6 +90,11 @@ public abstract class Login extends ApplicationPage
         }
     }
     
+    /**
+     * Used to indicate what page to redirect to after the login() listener is done.
+     * 
+     * @param callback The page to redirect to after a login.
+     */
     public void setCallback(final ICallback callback)
     {
         this.callback = callback;

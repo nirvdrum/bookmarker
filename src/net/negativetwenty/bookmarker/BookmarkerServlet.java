@@ -16,9 +16,6 @@
 
 /*
  * Created on Jul 23, 2004
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 package net.negativetwenty.bookmarker;
 
@@ -30,9 +27,16 @@ import org.apache.tapestry.ApplicationServlet;
 import org.objectstyle.cayenne.conf.BasicServletConfiguration;
 import org.objectstyle.cayenne.conf.Configuration;
 
+/**
+ * Main servlet for the Bookmarker webapp.
+ *
+ * @author nirvdrum
+ */
 public class BookmarkerServlet extends ApplicationServlet 
 {
     /**
+     * Takes care of setting up Cayenne.
+     * 
      * @see javax.servlet.Servlet#init(ServletConfig)
      */
     public void init(ServletConfig config) throws ServletException 

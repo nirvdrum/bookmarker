@@ -16,9 +16,6 @@
 
 /*
  * Created on Jul 21, 2004
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 package net.negativetwenty.bookmarker;
 
@@ -39,10 +36,9 @@ import org.objectstyle.cayenne.query.SelectQuery;
 //import de.nava.informa.exporters.*;
 
 /**
+ * Controls adding a new bookmark to the database.
+ * 
  * @author nirvdrum
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 public abstract class AddBookmark extends SecureApplicationPage 
 {
@@ -51,11 +47,22 @@ public abstract class AddBookmark extends SecureApplicationPage
 	public abstract Category getCategory();
 	public abstract void setCategory(Category category);
 	
+	/**
+	 * Builds up a new CategorySelectionModel for a category drop-down list  (PropertySelection component).
+	 * 
+	 * @return The new CategorySelectionModel instance.
+	 */
+	// TODO This is duplicated from AddCategory.  Decide whether this is bad or not.
 	public IPropertySelectionModel getCategoryModel()
 	{
 		return new CategorySelectionModel(getDataContext());
 	}
 	
+	/**
+	 * AddBookmark listener.  Adds a new bookmark to or modifies an existing bookmark in the database.
+	 * 
+	 * @param cycle
+	 */
 	// TODO This should be refactored to be a different name, since it is also used to modify existing bookmarks.
 	public void addBookmark(final IRequestCycle cycle)
 	{
@@ -89,6 +96,11 @@ public abstract class AddBookmark extends SecureApplicationPage
 	    cycle.activate("Home");
 	}
 	
+	/**
+	 * Make sure the page has a valid Bookmark and Category to work with.
+	 * 
+	 * @param event
+	 */
 	public void pageBeginRender(final PageEvent event)
 	{	
 	    final Visit v = (Visit) getVisit();
@@ -117,6 +129,9 @@ public abstract class AddBookmark extends SecureApplicationPage
 		}
 	}
 	
+	/**
+	 * Create a new RDF file to reflect changes made to the database.
+	 */
 	public void createRdf()
 	{
 	    /*

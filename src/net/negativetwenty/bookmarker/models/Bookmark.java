@@ -18,14 +18,25 @@ package net.negativetwenty.bookmarker.models;
 
 import net.negativetwenty.bookmarker.models.auto._Bookmark;
 
+/**
+ * Represents a Bookmark. 
+ *
+ * @author nirvdrum
+ */
 public class Bookmark extends _Bookmark 
 {
+    /**
+     * Increments a Bookmark's click count value by 1.
+     */
     public void addClick()
     {
         setClickCount(new Integer(getClickCount().intValue() + 1));
         getDataContext().commitChanges();
     }
     
+    /**
+     * Resets a Bookmark's click count to 0.
+     */
     public void resetClicks()
     {
         setClickCount(new Integer(0));

@@ -16,9 +16,6 @@
 
 /*
  * Created on Jul 24, 2004
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 package net.negativetwenty.bookmarker;
 
@@ -31,40 +28,66 @@ import org.objectstyle.cayenne.access.*;
 
 
 /**
+ * Handles interaction with Bookmark views.
+ * 
  * @author nirvdrum
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 public class ViewBookmarks extends ApplicationPage
-{	
+{
+    /**
+     * LinkClicked listener.  Reacts to a Bookmark's URL being clicked.
+     * 
+     * @param cycle
+     */
     public void linkClicked(final IRequestCycle cycle)
     {
+        // Increment the Bookmark's click count.
         final ObjectId id = (ObjectId) cycle.getServiceParameters()[0];
         final Bookmark b = (Bookmark) DataObjectUtils.objectForPK(getDataContext(), id);
         b.addClick();
 
+        // Redirect to the Bookmark's URL.
         throw new RedirectException(b.getUrl());
     }
 
+    /**
+     * RemoveBookmark listener.  Removes a bookmark from the database.
+     * 
+     * @param cycle
+     */
     public void removeBookmark(final IRequestCycle cycle)
     {
+        // Fetch the bookmark from the database, given its ObjectId.
         final Visit v = (Visit) getVisit();
         final ObjectId id = (ObjectId) cycle.getServiceParameters()[0];
         final Bookmark b = (Bookmark) DataObjectUtils.objectForPK(getDataContext(), id);
+        
+        // Remove the Bookmark from the database.
         v.removeBookmark(b);
     }
     
+    /**
+     * ModifyBookmark listener.  Sets things up for a Bookmark to be modified.
+     * 
+     * @param cycle
+     */
     public void modifyBookmark(final IRequestCycle cycle)
     {
+        // Fetch the bookmark from the database, given its ObjectId.
         final ObjectId id = (ObjectId) cycle.getServiceParameters()[0];
         final Bookmark b = (Bookmark) DataObjectUtils.objectForPK(getDataContext(), id);
         
+        // Set up an instance of the AddBookmark page for bookmark modification, and redirect to that page.
         final AddBookmark ab = (AddBookmark) cycle.getPage("AddBookmark");
         ab.setBookmark(b);
         cycle.activate(ab);
     }
     
+    /**
+     * Set the heading of the page to be the currently selected category.
+     * 
+     * @param event
+     */
     public void pageBeginRender(final PageEvent event) 
     {
         final Visit v = (Visit) getVisit();

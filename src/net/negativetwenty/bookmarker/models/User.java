@@ -21,25 +21,38 @@ import net.negativetwenty.bookmarker.models.auto._User;
 import java.util.*;
 import org.objectstyle.cayenne.access.*;
 
+/**
+ * Represents a user.
+ *
+ * @author nirvdrum
+ */
 public class User extends _User 
 {
     /**
-     * Attempts to find User for given userName and password. Returns such object
-     * if found or null if not.
+     * Attempts to log a user into the system.
+     * 
+     * @param context The DataContext to use for the db query.
+     * @param username The username to check.
+     * @param password The password to check.
+     * @return The User if a valid login, null otherwise.
      */
     public static User login(final DataContext context, final String username, final String password) 
     {
+        // Set up the parameters for the db query.
         final Map parameters = new HashMap();
         parameters.put("username", username);
         parameters.put("password", password);
 
+        // Query the db.
         final List objects = context.performQuery("UserLogin", parameters, true);
         
+        // If there was a matching User, return it.
         if (objects.size() > 0)
         {
             return (User) objects.get(0);
         }
 
+        // Otherwise, return null to indicate invalid credentials.
         return null;
     }
 }

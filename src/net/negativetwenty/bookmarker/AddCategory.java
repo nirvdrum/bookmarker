@@ -16,9 +16,6 @@
 
 /*
  * Created on Jul 21, 2004
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 package net.negativetwenty.bookmarker;
 
@@ -31,10 +28,9 @@ import org.objectstyle.cayenne.access.DataContext;
 
 
 /**
+ * Controls adding new categories to the database.
+ * 
  * @author nirvdrum
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 public abstract class AddCategory extends SecureApplicationPage implements PageRenderListener
 {
@@ -43,28 +39,50 @@ public abstract class AddCategory extends SecureApplicationPage implements PageR
 	public abstract Category getParent();
 	public abstract void setParent(Category parent);
 	
+	/**
+	 * Builds up a new CategorySelectionModel for a category drop-down list  (PropertySelection component).
+	 * 
+	 * @return The new CategorySelectionModel instance.
+	 */
 	public IPropertySelectionModel getCategoryModel()
 	{
 		return new CategorySelectionModel(getDataContext());
 	}
 	
+	/**
+	 * AddCategory listener.  Adds a new category to the database.
+	 * 
+	 * @param cycle
+	 */
 	public void addCategory(final IRequestCycle cycle)
 	{
 	    final Visit v = (Visit) getVisit();
 	    final DataContext dc = getDataContext();
 	    final Category category = getCategory();
-		dc.registerNewObject(category);
 		
-		category.setCreated(new java.util.Date());
-		category.setCreatedBy(getUser());
-		category.setParent(getParent());
+	    // Register the category with the dc.
+	    dc.registerNewObject(category);
+	    
+	    // Set the category's property values.
+	    category.setCreated(new java.util.Date());
+	    category.setCreatedBy(getUser());
+	    category.setParent(getParent());
 		
-		dc.commitChanges();
+	    // Add the category to the db.
+	    dc.commitChanges();
+		
+		// Invalidate the tree model so the new category will be added to the tree.
 		v.invalidateTreeModel();
 		
+		// TODO Change this to be some sort of callback.
 		cycle.activate("Home");
 	}
 	
+	/**
+	 * Make sure the category property is a valid Category instance when the page renders.
+	 * 
+	 * @param event
+	 */
 	public void pageBeginRender(final PageEvent event)
 	{
 		if (getCategory() == null)

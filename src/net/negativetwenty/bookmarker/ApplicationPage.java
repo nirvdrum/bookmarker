@@ -16,9 +16,6 @@
 
 /*
  * Created on Jul 23, 2004
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 package net.negativetwenty.bookmarker;
 
@@ -41,6 +38,7 @@ import org.objectstyle.cayenne.query.SelectQuery;
  * to access DataContext and such.
  * 
  * @author Andrei Adamchik
+ * @author nirvdrum
  */
 public class ApplicationPage extends BasePage implements PageRenderListener, ITreeStateListener
 {

@@ -18,6 +18,11 @@ package net.negativetwenty.bookmarker.models;
 
 import net.negativetwenty.bookmarker.models.auto._Category;
 
+/**
+ * Represents a bookmark category.
+ *
+ * @author nirvdrum
+ */
 public class Category extends _Category {
 
 }

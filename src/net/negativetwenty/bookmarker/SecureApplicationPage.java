@@ -16,9 +16,6 @@
 
 /*
  * Created on Sep 28, 2004
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 package net.negativetwenty.bookmarker;
 
@@ -27,22 +24,28 @@ import org.apache.tapestry.callback.*;
 import org.apache.tapestry.event.*;
 
 /**
+ * Common superclass for all pages requiring a logged-in user before they can be accessed.
+ * 
  * @author nirvdrum
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 public class SecureApplicationPage extends ApplicationPage implements PageValidateListener
 {
+    /**
+     * Checks that a user is logged in before allowing the page to load.
+     * 
+     * @param event
+     */
     public void pageValidate(final PageEvent event)
     {
         final Visit visit = (Visit) getVisit();
         
+        // If a user is logged-in, there's nothing to do.
         if (visit.isLoggedIn())
         {
             return;
         }
         
+        // Otherwise, redirect the user to the Login page so he can login.
         final IRequestCycle cycle = getRequestCycle();
         final Login login = (Login) cycle.getPage("Login");
         login.setCallback(new PageCallback(this));
