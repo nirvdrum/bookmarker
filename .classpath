@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/Servlet"/>
 	<classpathentry kind="lib" path="lib/tapestry-contrib-3.0.jar"/>
 	<classpathentry kind="lib" path="lib/tapestry-3.0.jar"/>
 	<classpathentry kind="lib" path="lib/javassist-2.5.1.jar"/>

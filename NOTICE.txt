@@ -1,1 +1,10 @@
-This product includes software developed by The Apache Software Foundation (http://www.apache.org/).
+This product includes software developed by:
+ 
+	o Drew Davidson (http://www.ognl.org/)
+	o ObjectStyle, LLC (http://www.objectstyle.org/cayenne/)
+	o The Apache Software Foundation (http://www.apache.org/)
+	o The HSQLDB Project (http://hsqldb.sourceforge.net/)
+	o The Informa Project (http://informa.sf.net/)
+	o The Javassist Project (http://www.csg.is.titech.ac.jp/~chiba/javassist/)
+	o The JDOM Project (http://www.jdom.org/)
+	o The Jetty Project (http://jetty.mortbay.org/)
