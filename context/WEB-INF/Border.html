@@ -1,37 +1,36 @@
 <html jwcid="@Shell" title="Bookmarker" stylesheet="ognl:assets.stylesheet" delegate="ognl:beans.metaGenerator">
-<head>  <LINK REL="StyleSheet" HREF="../css/root.css" TYPE="text/css"></head>
 <body jwcid="@Body">
 
     <!-- Start Header -->
-    <a href="#" jwcid="@PageLink" page="Home"><span key="header">Header.</span></a>
+    <div id="header">
+    		<a href="#" jwcid="@PageLink" page="Home"><span key="header">Header.</span></a>
+    </div>
+    
     <br/><br/>
     <!-- End Header -->
         
-    <table width="100%">
-        <tr>
             <!-- Start Menu Bar -->
-            <td valign="top">
+            <div id="menuBar">
             		<span jwcid="treeView">
 					<span jwcid="treeData">
 						<span jwcid="treeNodeView"/>
 					</span>
 				</span>	
-			</td>
+			</div>
             <!-- End Menu Bar -->
             
             <!-- Start Main Content -->
-            <td id="mainContent">
-				<span jwcid="@RenderBody">
-				Template HTML goes here.
-				</span>
-            </td>
+                <div id="mainContent">
+					<span jwcid="@RenderBody">
+					Template HTML goes here.
+					</span>
+                </div>
             <!-- End Main Content -->
-        </tr>
-    </table>
 
 	<!-- Start Footer -->
     <p>
-    <table class="footer">
+    <div id="footer">
+    <table width="100%">
    		<tr>
       		<td class="boxHeader"><center><span key="footer" raw="true">Copyright <a href="http://www.negativetwenty.net/">NegativeTwenty</a>, 2004.</span></center></td>
    		</tr>
@@ -44,6 +43,7 @@
       		</td>
     		</tr>
 	</table>
+    </div>
     </p>
     <!-- End Footer -->
 

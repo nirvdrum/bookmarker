@@ -35,6 +35,11 @@ A:active
 	text-decoration: none;
 }
 
+th
+{
+	width: 25%;
+}
+
 .box
 {
 	width: 70%;
@@ -55,17 +60,42 @@ A:active
     border: 1px solid rgb(38, 112, 255);
 }
 
-td#mainContent
+#mainContent
 {
-	position: relative;
-	left: 50%;
-	right: 50%;
+	position: absolute;
+	left: 20%;
+	top: 10%;
+	width: 80%;
+		margin-left:auto;
+	margin-right:auto;
+	overflow:auto;
 }
 
-.footer
+div#header
+{
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+div#menuBar
+{
+	position: fixed;
+	left: 0;
+	right: 80%;
+	top: 10%;
+	overflow: auto;
+}
+
+div#footer
 {
 	position: fixed;
 	bottom: 0;
-	width: 100%;
-	height: auto;
+}
+
+h1
+{
+	background-color: rgb(75,75,75);
+	color: rgb(0,0,0);
+	font-weight: bold;
 }
