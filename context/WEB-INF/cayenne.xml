@@ -5,7 +5,7 @@
 
 	<node name="DefaultNode"
 		 datasource="DefaultNode.driver.xml"
-		 adapter="org.objectstyle.cayenne.dba.mysql.MySQLAdapter"
+		 adapter="org.objectstyle.cayenne.dba.hsqldb.HSQLDBAdapter"
 		 factory="org.objectstyle.cayenne.conf.DriverDataSourceFactory">
 			<map-ref name="DefaultMap"/>
 	 </node>

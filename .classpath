@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="lib/cayenne.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/Servlet"/>
-	<classpathentry exported="true" kind="lib" path="lib/mysql-connector-java-3.0.14-production-bin.jar"/>
 	<classpathentry kind="lib" path="lib/tapestry-contrib-3.0.jar"/>
 	<classpathentry kind="lib" path="lib/tapestry-3.0.jar"/>
 	<classpathentry kind="lib" path="lib/javassist-2.5.1.jar"/>
@@ -16,5 +14,11 @@
 	<classpathentry kind="lib" path="lib/tapestry-contrib-exception.jar"/>
 	<classpathentry kind="lib" path="lib/informa.jar"/>
 	<classpathentry kind="lib" path="lib/jdom.jar"/>
+	<classpathentry kind="lib" path="lib/hsqldb.jar"/>
+	<classpathentry kind="lib" path="lib-standalone/org.mortbay.jetty.jar"/>
+	<classpathentry kind="lib" path="lib-standalone/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="lib-standalone/jasper-runtime.jar"/>
+	<classpathentry kind="lib" path="lib-standalone/jasper-compiler.jar"/>
+	<classpathentry kind="lib" path="/Applications/eclipse/workspace/cayenne/dist/cayenne-1.2-dev/lib/cayenne.jar"/>
 	<classpathentry kind="output" path="context/WEB-INF/classes"/>
 </classpath>

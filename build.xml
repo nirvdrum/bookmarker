@@ -6,13 +6,16 @@
 	
 	<!-- Project directories -->
 	<property name="context.dir" value="context"/>
+	<property name="db.dir" value="db"/>
 	<property name="lib.dir" value="lib"/>
+	<property name="lib-standalone.dir" value="lib-standalone"/>
 	<property name="src.dir" value="src"/>
 	<property name="cayenne.dir" value="${src.dir}/net/negativetwenty/bookmarker/models"/>
 	
 	<!-- Temporary build directories -->
 	<property name="build.dir" value="build"/>
 	<property name="build.classes" location="${build.dir}/classes"/>
+	<property name="standalone.dir" value="${build.dir}/standalone"/>
 	
 	<!-- Global "magic" property for <javac> -->
 	<property name="build.compiler" value="modern"/>
@@ -21,12 +24,13 @@
 		<fileset dir="${lib.dir}">
 			<include name="*.jar"/>
 		</fileset>
-		<fileset dir="${tomcat.dir}/common/lib">
-			<include name="servlet-api.jar"/>
+		<fileset dir="${lib-standalone.dir}">
+			<include name="*.jar"/>
 		</fileset>
 	</path>
 	
 	<target name="init">
+		<mkdir dir="${db.dir}"/>
 		<mkdir dir="${build.dir}"/>
 		<mkdir dir="${build.classes}"/>
 		<touch file="${context.dir}/bookmarks.rdf"/>
@@ -35,6 +39,13 @@
 		     <classpath refid="classpath"/>
 		</taskdef>
 		<cgen map="${context.dir}/WEB-INF/DefaultMap.map.xml" destDir="${src.dir}" superpkg="net.negativetwenty.bookmarker.models.auto"/>
+	
+		<taskdef name="cdbgen" classname="org.objectstyle.cayenne.tools.DbGeneratorTask">
+		     <classpath refid="classpath"/>
+		</taskdef>
+		<cdbgen map="${context.dir}/WEB-INF/DefaultMap.map.xml" adapter="org.objectstyle.cayenne.dba.hsqldb.HSQLDBAdapter"
+			driver="org.hsqldb.jdbcDriver" url="jdbc:hsqldb:hsql://localhost/bookmarker" username="sa" password=""
+			startHsqldb="true" hsqldbProps="database.0=file:${db.dir}/bookmarker;dbname.0=bookmarker"/>
 	</target>
 	
 	<target name="clean">
@@ -43,19 +54,42 @@
 	</target>
 	
 	<target name="compile" depends="clean,init">
-		<javac srcdir="${src.dir}" destdir="${build.classes}" classpathref="classpath"/>
+		<javac srcdir="${src.dir}" destdir="${build.classes}" classpathref="classpath" debug="true"/>
 		<war destfile="${build.dir}/bookmarker.war" webxml="${context.dir}/WEB-INF/web.xml">
 			<fileset dir="${context.dir}">
 				<exclude name="**/WEB-INF/web.xml"/>
 			</fileset>
-			<classes dir="${build.classes}" file="${context.dir}/log4j.properties"/>
-			<lib dir="${lib.dir}">
-				<exclude name="**/servlet-api.jar"/>
-			</lib>
+			<classes dir="${build.classes}" file="${context.dir}/log4j.properties" excludes="**/Main.class"/>
+			<lib dir="${lib.dir}"/>
 		</war>
 	</target>
 	
-	<target name="deploy" depends="compile">
+	<target name="deploy" depends="compile,standalone">
 		<copy todir="${tomcat.dir}/webapps" file="${build.dir}/bookmarker.war"/>
+	</target>
+	
+	<!-- Build the app for "standalone" mode. -->
+	<target name="standalone" depends="compile">
+		
+		<!-- Create the standalone app's directory structure. -->
+		<mkdir dir="${standalone.dir}"/>
+		<mkdir dir="${standalone.dir}/db"/>
+		<mkdir dir="${standalone.dir}/lib"/>
+		
+		<!-- Get all the libs the standalone app requires. -->
+		<copydir dest="${standalone.dir}/db" src="${db.dir}"/>
+		<copydir dest="${standalone.dir}/lib" src="${lib-standalone.dir}"/>
+		<copyfile dest="${standalone.dir}/bookmarker.war" src="${build.dir}/bookmarker.war"/>
+		
+		<!-- Build the main jar file. -->
+		<jar destfile="${build.dir}/standalone/bookmarker.jar">
+			<fileset dir="${build.classes}">
+				<include name="**/Main.class"/>
+			</fileset>
+			<manifest>
+				<attribute name="Class-Path" value="lib/org.mortbay.jetty.jar lib/javax.servlet.jar lib/jasper-compiler.jar lib/jasper-runtime.jar"/>
+				<attribute name="Main-Class" value="net.negativetwenty.bookmarker.Main" />
+			</manifest>
+		</jar>
 	</target>
 </project>

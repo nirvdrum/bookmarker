@@ -7,10 +7,18 @@
 
 <application name="bookmarker" engine-class="net.negativetwenty.bookmarker.EnhancedEngine" >
 
-    <description><![CDATA[   add a description   ]]></description>
+    <description>A webapp for managing web page bookmarks.</description>
 
     <property name="org.apache.tapestry.visit-class">net.negativetwenty.bookmarker.Visit</property>
+    <property name="org.apache.tapestry.global-class">net.negativetwenty.bookmarker.Global</property>
+
     
+    <!-- HSQLDB properties -->
+    <property name="start-database-server" value="true"/>
+    <property name="database-alias" value="bookmarker"/>
+    <property name="database-file" value="db/bookmarker"/>
+    <property name="database-port" value="9001"/>
+        
     <page name="Home" specification-path="pages/Home.page"/>
     <page name="AddBookmark" specification-path="pages/AddBookmark.page"/>
 	<page name="AddCategory" specification-path="pages/AddCategory.page"/>

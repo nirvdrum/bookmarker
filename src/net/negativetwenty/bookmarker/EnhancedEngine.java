@@ -6,7 +6,10 @@
  */
 package net.negativetwenty.bookmarker;
 
-import org.apache.tapestry.engine.BaseEngine;
+import java.util.*;
+import org.apache.tapestry.*;
+import org.apache.tapestry.engine.*;
+import org.apache.tapestry.request.RequestContext;
 
 /**
  * @author nirvdrum
@@ -19,5 +22,10 @@ public class EnhancedEngine extends BaseEngine
     protected String getExceptionPageName() 
     {
        return "exception:Exception";
+    }
+    
+    protected Object createGlobal(final RequestContext context)
+    {
+        return new Global(getPropertySource());
     }
 }
