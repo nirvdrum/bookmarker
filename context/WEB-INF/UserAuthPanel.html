@@ -1,0 +1,7 @@
+ <form jwcid="@Form" listener="ognl:listeners.submit">
+	<span class="label">Username:</span>
+    <input type="text" jwcid="@TextField" value="ognl:username"/><br/>
+    <span class="label">Password:</span>
+    <input type="password" jwcid="@TextField" hidden="true" value="ognl:password"/><br/>
+    <input type="submit" jwcid="@Submit"/>
+</form>

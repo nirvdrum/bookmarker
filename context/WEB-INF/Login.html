@@ -4,15 +4,15 @@
 </head>
 <body jwcid="$content$">
 <span jwcid="@Border">
-
-    <form jwcid="@Form" listener="ognl:listeners.login">
+  
+    <form jwcid="@UserAuthPanel" username="ognl:username" password="ognl:password" listener="ognl:listeners.login">
         <span class="label">Username:</span>
-        <input type="text" jwcid="@TextField" value="ognl:username"/><br/>
+        <input type="text"/><br/>
         <span class="label">Password:</span>
-        <input type="password" jwcid="@TextField" hidden="true" value="ognl:password"/><br/>
-        <input type="submit" jwcid="@Submit"/>
+        <input type="password"/><br/>
+        <input type="submit"/>
     </form>
-
+    
 </span>
 </body>
 </html>

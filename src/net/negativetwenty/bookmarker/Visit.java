@@ -40,7 +40,7 @@ import org.objectstyle.cayenne.query.SelectQuery;
 
 public class Visit implements Serializable 
 {
-    final protected DataContext dataContext;
+    protected final DataContext dataContext;
 	protected ITreeModel treeModel = null;
 	protected List bookmarks = null;
 	protected Category category = null;

@@ -30,6 +30,7 @@
         
         <!-- If logged in, then show a "Logout" link. -->
         <span jwcid="isLoggedIn@Conditional" condition="ognl:page.visit.loggedIn">
+            <a href="#" jwcid="userAdmin@PageLink" page="UserAdmin">Admin Users</a><br/>
             <a href="#" jwcid="logout@DirectLink" listener="ognl:listeners.logout"><span key="logout">Logout</span></a>
         </span>
     </div>
