@@ -2,9 +2,10 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "Bookmarker"
-!define PRODUCT_VERSION "0.0.1"
+!define PRODUCT_VERSION "0.0.2"
 !define PRODUCT_PUBLISHER "NegativeTwenty"
 !define PRODUCT_WEB_SITE "http://www.negativetwenty.net/projects/bookmarker/"
+!define BOOKMARKER_HOME "http://localhost:8080/bookmarker/Home.html"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\AppMainExe.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
@@ -59,9 +60,39 @@ ShowInstDetails show
 ShowUnInstDetails show
 
 Section "MainSection" SEC01
+  ClearErrors
+  ReadRegStr $1 HKLM "SOFTWARE\JavaSoft\Java Development Kit" "CurrentVersion"
+  ReadRegStr $2 HKLM "SOFTWARE\JavaSoft\Java Development Kit\$1" "JavaHome"
+
+  IfErrors 0 NoAbort
+    ReadRegStr $1 HKLM "SOFTWARE\JavaSoft\Java Runtime Environment" "CurrentVersion"
+    ReadRegStr $2 HKLM "SOFTWARE\JavaSoft\Java Runtime Environment\$1" "JavaHome"
+    
+    IfErrors 0 NoAbort
+      MessageBox MB_OK "Couldn't find a JRE installed. Setup will exit now."
+      Quit
+
+  NoAbort:
+
+  Push "1.4"
+  Push $1
+  Call VersionCheck
+  Pop $1
+
+  IntCmp $1 1 UpdateJDK ProceedInstall ProceedInstall
+  
+  UpdateJDK:
+    MessageBox MB_OK "This program requires JRE 1.4 or greater.  Please install a newer JRE. Setup will exit now."
+    Quit
+
+  ProceedInstall:
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
   File "..\build\standalone\*"
+  
+  SetOutPath "$INSTDIR\bookmarker"
+  SetOverwrite ifnewer
+  File /r "..\build\standalone\bookmarker\*"
 
   SetOutPath "$INSTDIR\db"
   SetOverwrite ifnewer
@@ -81,8 +112,12 @@ SectionEnd
 
 Section -AdditionalIcons
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
-  WriteIniStr "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
-  CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
+  WriteIniStr "$INSTDIR\${PRODUCT_PUBLISHER}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
+  WriteIniStr "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${BOOKMARKER_HOME}"
+  SetOutPath "$INSTDIR"
+  CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\${PRODUCT_NAME}.lnk" "$2\bin\java.exe" "-jar bookmarker.jar"
+  CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\My Bookmarks.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
+  CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\${PRODUCT_PUBLISHER}.lnk" "$INSTDIR\${PRODUCT_PUBLISHER}.url"
   CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk" "$INSTDIR\uninst.exe"
   !insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd
@@ -111,17 +146,64 @@ FunctionEnd
 
 Section Uninstall
   !insertmacro MUI_STARTMENU_GETFOLDER "Application" $ICONS_GROUP
-  Delete "$INSTDIR\*.*"
-  RMDir "$INSTDIR"
-
-  Delete "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk"
-  Delete "$SMPROGRAMS\$ICONS_GROUP\Website.lnk"
-  Delete "$DESKTOP\Bookmarker.lnk"
-  Delete "$SMPROGRAMS\$ICONS_GROUP\Bookmarker.lnk"
-
-  RMDir "$SMPROGRAMS\$ICONS_GROUP"
+  RMDir /r "$INSTDIR"
+  RMDir /r "$SMPROGRAMS\$ICONS_GROUP"
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
   SetAutoClose true
 SectionEnd
+
+Function VersionCheck
+  Exch $0 ;second versionnumber
+  Exch
+  Exch $1 ;first versionnumber
+  Push $R0 ;counter for $0
+  Push $R1 ;counter for $1
+  Push $3 ;temp char
+  Push $4 ;temp string for $0
+  Push $5 ;temp string for $1
+  StrCpy $R0 "-1"
+  StrCpy $R1 "-1"
+  Start:
+  StrCpy $4 ""
+  DotLoop0:
+  IntOp $R0 $R0 + 1
+  StrCpy $3 $0 1 $R0
+  StrCmp $3 "" DotFound0
+  StrCmp $3 "." DotFound0
+  StrCpy $4 $4$3
+  Goto DotLoop0
+  DotFound0:
+  StrCpy $5 ""
+  DotLoop1:
+  IntOp $R1 $R1 + 1
+  StrCpy $3 $1 1 $R1
+  StrCmp $3 "" DotFound1
+  StrCmp $3 "." DotFound1
+  StrCpy $5 $5$3
+  Goto DotLoop1
+  DotFound1:
+  Strcmp $4 "" 0 Not4
+    StrCmp $5 "" Equal
+    Goto Ver2Less
+  Not4:
+  StrCmp $5 "" Ver2More
+  IntCmp $4 $5 Start Ver2Less Ver2More
+  Equal:
+  StrCpy $0 "0"
+  Goto Finish
+  Ver2Less:
+  StrCpy $0 "1"
+  Goto Finish
+  Ver2More:
+  StrCpy $0 "2"
+  Finish:
+  Pop $5
+  Pop $4
+  Pop $3
+  Pop $R1
+  Pop $R0
+  Pop $1
+  Exch $0
+FunctionEnd
