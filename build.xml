@@ -76,6 +76,7 @@
 		<mkdir dir="${standalone.dir}"/>
 		<mkdir dir="${standalone.dir}/${standalone-db.dir}"/>
 		<mkdir dir="${standalone.dir}/lib"/>
+		<mkdir dir="${standalone.dir}/bookmarker"/>
 		
 		<!-- Get all the libs the standalone app requires. -->
 		<copy todir="${standalone.dir}/${standalone-db.dir}">
@@ -86,7 +87,7 @@
 			<fileset dir="${lib-standalone.dir}"/>
 		</copy>
 		
-		<copy toDir="${standalone.dir}" file="${build.dir}/bookmarker.war"/>
+		<unjar dest="${standalone.dir}/bookmarker/" src="${build.dir}/bookmarker.war"/>
 		
 		<!-- Build the main jar file. -->
 		<jar destfile="${build.dir}/standalone/bookmarker.jar">
