@@ -31,8 +31,6 @@ public class Global implements Serializable
             
             String properties = "database.0=file:" + file + ";dbname.0=" + alias;
             
-            System.out.println("Database properties = " + properties);
-            
             server = new Server();
             
             server.putPropertiesFromString(properties);
