@@ -74,9 +74,9 @@ public class ExportService extends AbstractService
         encoder.getPrintWriter();
         
         // Write the XML to the output stream sent to the web browser.
-        //cycle.getRequestContext().getResponse().setHeader(
-        //       "Content-Disposition",
-        //        "attachment; filename=bookmarker_export.xml");
+        cycle.getRequestContext().getResponse().setHeader(
+               "Content-Disposition",
+               "attachment; filename=bookmarker_export.xml");
         output.setContentType("application/octet-stream");
         output.write(out.toByteArray());
     }
