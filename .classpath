@@ -19,6 +19,6 @@
 	<classpathentry kind="lib" path="lib-standalone/javax.servlet.jar"/>
 	<classpathentry kind="lib" path="lib-standalone/jasper-runtime.jar"/>
 	<classpathentry kind="lib" path="lib-standalone/jasper-compiler.jar"/>
-	<classpathentry kind="lib" path="/Applications/eclipse/workspace/cayenne/dist/cayenne-1.2-dev/lib/cayenne.jar"/>
+	<classpathentry kind="lib" path="lib/cayenne.jar"/>
 	<classpathentry kind="output" path="context/WEB-INF/classes"/>
 </classpath>
