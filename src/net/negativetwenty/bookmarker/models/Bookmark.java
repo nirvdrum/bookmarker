@@ -25,6 +25,8 @@ import net.negativetwenty.bookmarker.models.auto._Bookmark;
  */
 public class Bookmark extends _Bookmark 
 {
+    protected boolean importEntry = true;
+    
     /**
      * Increments a Bookmark's click count value by 1.
      */
@@ -42,7 +44,20 @@ public class Bookmark extends _Bookmark
         setClickCount(new Integer(0));
         getDataContext().commitChanges();
     }
+    
+    /**
+     * @return Returns the importEntry.
+     */
+    public boolean isImportEntry()
+    {
+        return importEntry;
+    }
+    
+    /**
+     * @param importEntry The importEntry to set.
+     */
+    public void setImportEntry(boolean importEntry)
+    {
+        this.importEntry = importEntry;
+    }
 }
-
-
-

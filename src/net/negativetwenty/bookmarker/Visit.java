@@ -30,12 +30,10 @@ import org.apache.tapestry.contrib.tree.simple.SimpleTreeModel;
 import org.apache.tapestry.contrib.tree.simple.SimpleTreeStateModel;
 import org.apache.tapestry.contrib.tree.simple.TreeNode;
 
-import org.objectstyle.cayenne.CayenneException;
 import org.objectstyle.cayenne.access.DataContext;
 import org.objectstyle.cayenne.conf.Configuration;
 import org.objectstyle.cayenne.exp.*;
 import org.objectstyle.cayenne.query.SelectQuery;
-import org.objectstyle.cayenne.util.*;
 
 /**
  * Represents session state variables.
@@ -152,37 +150,6 @@ public class Visit implements Serializable
     public void setBookmarks(final List bookmarks)
     {
         this.bookmarks = bookmarks;
-        
-        
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        XMLEncoder encoder = new XMLEncoder(new PrintWriter(out, true));
-        encoder.encodeCollection("Bookmarks", bookmarks);
-        encoder.getPrintWriter();
-        
-        XMLDecoder decoder = new XMLDecoder();
-        try
-        {
-            List newBookmarks = decoder.decodeCollection(new StringReader(out.toString()));
-            System.out.println("Blah");
-        }
-        catch (CayenneException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
-        /*
-        XMLDecoder decoder = new XMLDecoder();
-        for (final Iterator it = bookmarks.iterator(); it.hasNext();)
-        {
-            final Bookmark b = (Bookmark) it.next();
-            b.encodeAsXML(encoder);
-            encoder.getPrintWriter();
-            String blah = out.toString();
-            decoder.decode(new StringReader(blah), true);
-
-            Bookmark temp = new Bookmark(decoder);
-        }*/
     }
     
     /**

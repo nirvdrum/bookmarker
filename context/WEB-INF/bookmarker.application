@@ -36,4 +36,7 @@
 
 	<page name="LoadFile" specification-path="/WEB-INF/pages/LoadFile.page"/>
 
+
+	<page name="Import" specification-path="/WEB-INF/pages/Import.page"/>
+
 </application>

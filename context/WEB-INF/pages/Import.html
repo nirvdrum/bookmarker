@@ -1,0 +1,25 @@
+<html>
+<head>
+  <LINK REL="StyleSheet" HREF="../../css/root.css" TYPE="text/css">
+</head>
+<body jwcid="$content$">
+<span jwcid="border@Border">
+    
+    <form jwcid="import@Form" listener="ognl:listeners.importBookmarks">
+    		<h2>Imported Entries:</h2>
+    
+        <table border="1">
+            <tr jwcid="bookmarks@Foreach" source="ognl:bookmarks" value="ognl:bookmark" element="tr">
+                <td><input type="checkbox" jwcid="@Checkbox" selected="ognl:bookmark.importEntry"/></td>
+                <td><select jwcid="category@PropertySelection" value="ognl:bookmark.category" model="ognl:categoryModel"/></td>
+                <td><span jwcid="bookmarkLinkText@InsertText" value="ognl:bookmark.title"/></td>
+                <td><span jwcid="description@InsertText" value="ognl:bookmark.description"/></td>
+            </tr>
+        </table>   
+        <br/>
+        <input jwcid="@Conditional" condition="ognl:bookmarks" element="input" type="submit" value="Import"/>
+    </form>
+    
+</span>
+</body>
+</html>
