@@ -33,23 +33,23 @@ import org.apache.tapestry.callback.PageCallback;
  */
 public class Border extends BaseComponent
 {
-    public void login(IRequestCycle cycle)
+    public void login(final IRequestCycle cycle)
     {
-        Login login = (Login) cycle.getPage("Login");
+        final Login login = (Login) cycle.getPage("Login");
         login.setCallback(new PageCallback(getPage()));
         throw new PageRedirectException(login);
     }
     
-    public void logout(IRequestCycle cycle)
+    public void logout(final IRequestCycle cycle)
     {
-        Visit v = (Visit) getPage().getVisit();
+        final Visit v = (Visit) getPage().getVisit();
         v.setUser(null);
         cycle.activate("Home");
     }
     
-    public void addBookmark(IRequestCycle cycle)
+    public void addBookmark(final IRequestCycle cycle)
     {
-        AddBookmark ab = (AddBookmark) cycle.getPage("AddBookmark");
+        final AddBookmark ab = (AddBookmark) cycle.getPage("AddBookmark");
         ab.setBookmark(null);
         cycle.activate(ab);
     }

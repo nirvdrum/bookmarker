@@ -38,7 +38,7 @@ public class MetaGenerator implements IRender
     /* (non-Javadoc)
      * @see org.apache.tapestry.IRender#render(org.apache.tapestry.IMarkupWriter, org.apache.tapestry.IRequestCycle)
      */
-    public void render(IMarkupWriter writer, IRequestCycle cycle)
+    public void render(final IMarkupWriter writer, final IRequestCycle cycle)
     {
         writer.beginEmpty("link");
         writer.attribute("rel", "alternate");

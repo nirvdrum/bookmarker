@@ -36,7 +36,7 @@ public class Main
 {
     public static void main(String[] args)
     {           
-        Server servletServer = new Server();
+        final Server servletServer = new Server();
         
         try
         {

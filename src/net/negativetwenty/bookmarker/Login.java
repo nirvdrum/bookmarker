@@ -57,8 +57,8 @@ public abstract class Login extends ApplicationPage
         if (user == null && getUsername().equals("admin") && getPassword().equals("password"))
         {
              // Get the list of all users.
-    			SelectQuery query = new SelectQuery(User.class);
-    			List users = dc.performQuery(query);
+             final SelectQuery query = new SelectQuery(User.class);
+             final List users = dc.performQuery(query);
     			
     			// Check that the list is empty.
     			if (users.isEmpty())

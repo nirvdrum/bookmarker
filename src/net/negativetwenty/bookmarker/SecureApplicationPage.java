@@ -34,17 +34,17 @@ import org.apache.tapestry.event.*;
  */
 public class SecureApplicationPage extends ApplicationPage implements PageValidateListener
 {
-    public void pageValidate(PageEvent event)
+    public void pageValidate(final PageEvent event)
     {
-        Visit visit = (Visit) getVisit();
+        final Visit visit = (Visit) getVisit();
         
         if (visit.isLoggedIn())
         {
             return;
         }
         
-        IRequestCycle cycle = getRequestCycle();
-        Login login = (Login) cycle.getPage("Login");
+        final IRequestCycle cycle = getRequestCycle();
+        final Login login = (Login) cycle.getPage("Login");
         login.setCallback(new PageCallback(this));
         throw new PageRedirectException(login);
     }

@@ -48,10 +48,10 @@ public abstract class AddCategory extends SecureApplicationPage implements PageR
 		return new CategorySelectionModel(getDataContext());
 	}
 	
-	public void addCategory(IRequestCycle cycle)
+	public void addCategory(final IRequestCycle cycle)
 	{
-		DataContext dc = getDataContext();
-		Category category = getCategory();
+	    final DataContext dc = getDataContext();
+	    final Category category = getCategory();
 		dc.registerNewObject(category);
 		
 		category.setCreated(new java.util.Date());
@@ -63,7 +63,7 @@ public abstract class AddCategory extends SecureApplicationPage implements PageR
 		cycle.activate("Home");
 	}
 	
-	public void pageBeginRender(PageEvent event)
+	public void pageBeginRender(final PageEvent event)
 	{
 		if (getCategory() == null)
 		{

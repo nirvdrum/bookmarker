@@ -40,7 +40,7 @@ import org.objectstyle.cayenne.query.SelectQuery;
 
 public class Visit implements Serializable 
 {
-	protected DataContext dataContext = null;
+    final protected DataContext dataContext;
 	protected ITreeModel treeModel = null;
 	protected List bookmarks = null;
 	protected Category category = null;
@@ -67,16 +67,15 @@ public class Visit implements Serializable
 	{
 	    if (treeModel == null)
 	    {
-	        Expression exp = ExpressionFactory.matchExp("parent", null);
-	        SelectQuery query = new SelectQuery(Category.class, exp);
+	        final Expression exp = ExpressionFactory.matchExp("parent", null);
+	        final SelectQuery query = new SelectQuery(Category.class, exp);
 			
-	        List categories = getDataContext().performQuery(query); 
-	        TreeNode rootNode = new TestTreeNode("Bookmarks");
+	        final List categories = getDataContext().performQuery(query); 
+	        final TreeNode rootNode = new TestTreeNode("Bookmarks");
 	        
-
 	        buildTree(categories, rootNode);
 			
-	        ITreeDataModel treeDataModel = new SimpleTreeDataModel(rootNode);
+	        final ITreeDataModel treeDataModel = new SimpleTreeDataModel(rootNode);
 	        treeModel = new SimpleTreeModel(treeDataModel, new SimpleTreeStateModel());
 	    }
 
@@ -85,11 +84,11 @@ public class Visit implements Serializable
 	
 	protected void buildTree(final List children, final TreeNode root)
 	{
-	    Iterator it = children.iterator();
+	    final Iterator it = children.iterator();
 	    while (it.hasNext())
 	    {
-	        Category c = (Category) it.next();
-	        TestTreeNode node = new TestTreeNode(c.getName());
+	        final Category c = (Category) it.next();
+	        final TestTreeNode node = new TestTreeNode(c.getName());
 	        buildTree(c.getChildren(), node);
 	        root.insert(node);
 	    }

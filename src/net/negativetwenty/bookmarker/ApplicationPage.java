@@ -60,7 +60,7 @@ public class ApplicationPage extends BasePage implements PageRenderListener, ITr
      */
     protected DataContext getDataContext() 
     {
-        Visit visit = (Visit) getVisit();
+        final Visit visit = (Visit) getVisit();
         return visit.getDataContext();
     }
 
@@ -69,7 +69,7 @@ public class ApplicationPage extends BasePage implements PageRenderListener, ITr
      */
     protected User getUser() 
     {
-        Visit visit = (Visit) getVisit();
+        final Visit visit = (Visit) getVisit();
         return visit.getUser();
     }
     
@@ -84,23 +84,23 @@ public class ApplicationPage extends BasePage implements PageRenderListener, ITr
 	public void treeStateChanged(TreeStateEvent tse)
 	{
 	    // Get the selected tree node and grab a copy of the root node.
-	    Visit v = (Visit) getVisit();
-	    TestTreeNode node = (TestTreeNode) v.getTreeModel().getTreeDataModel().getObject(tse.getTreeStateModel().getSelectedNode());
-	    TestTreeNode rootNode = (TestTreeNode) v.getTreeModel().getTreeDataModel().getRoot();
+	    final Visit v = (Visit) getVisit();
+	    final TestTreeNode node = (TestTreeNode) v.getTreeModel().getTreeDataModel().getObject(tse.getTreeStateModel().getSelectedNode());
+	    final TestTreeNode rootNode = (TestTreeNode) v.getTreeModel().getTreeDataModel().getRoot();
 	    
 	    // If the node isn't the root, then the user has selected a category.
 	    if (node.equals(rootNode) == false)
 	    {
 	        // Get the full list of categories.
-	        SelectQuery query = new SelectQuery(Category.class);
+	        final SelectQuery query = new SelectQuery(Category.class);
 	        query.addPrefetch("bookmarks");		
-	        List categories = getDataContext().performQuery(query); 
+	        final List categories = getDataContext().performQuery(query); 
 		
 	        // Iterate over the category list.
-	        Iterator it = categories.iterator();
+	        final Iterator it = categories.iterator();
 	        while (it.hasNext())
 	        {
-	            Category c = (Category) it.next();
+	            final Category c = (Category) it.next();
 		    
 	            // If the current category matches the selected node . . .
 	            if (c.getName().equals(node.getValue()))
@@ -116,13 +116,13 @@ public class ApplicationPage extends BasePage implements PageRenderListener, ITr
 	    else
 	    {
 	        // Immediately under the root, we want to show all bookmarks with no associated category.
-	        Expression exp = ExpressionFactory.matchExp("category", null);
-	        SelectQuery query = new SelectQuery(Bookmark.class, exp);
+	        final Expression exp = ExpressionFactory.matchExp("category", null);
+	        final SelectQuery query = new SelectQuery(Bookmark.class, exp);
 	        
 	        // Fetch the list of all such bookmarks and update the visit object appropriately.
-	        List bookmarks = getDataContext().performQuery(query);
+	        final List bookmarks = getDataContext().performQuery(query);
             v.setBookmarks(bookmarks);
-            Category c = new Category();
+            final Category c = new Category();
             
             // If there any bookmarks with no associated category, we want to show something under the 
             // category heading for these bookmarks.

@@ -38,37 +38,37 @@ import org.objectstyle.cayenne.access.*;
  */
 public class ViewBookmarks extends ApplicationPage
 {	
-    public void linkClicked(IRequestCycle cycle)
+    public void linkClicked(final IRequestCycle cycle)
     {
-        ObjectId id = (ObjectId) cycle.getServiceParameters()[0];
-        Bookmark b = (Bookmark) DataObjectUtils.objectForPK(getDataContext(), id);
+        final ObjectId id = (ObjectId) cycle.getServiceParameters()[0];
+        final Bookmark b = (Bookmark) DataObjectUtils.objectForPK(getDataContext(), id);
         b.addClick();
 
         throw new RedirectException(b.getUrl());
     }
 
-    public void removeBookmark(IRequestCycle cycle)
+    public void removeBookmark(final IRequestCycle cycle)
     {
-        Visit v = (Visit) getVisit();
-        ObjectId id = (ObjectId) cycle.getServiceParameters()[0];
-        Bookmark b = (Bookmark) DataObjectUtils.objectForPK(getDataContext(), id);
+        final Visit v = (Visit) getVisit();
+        final ObjectId id = (ObjectId) cycle.getServiceParameters()[0];
+        final Bookmark b = (Bookmark) DataObjectUtils.objectForPK(getDataContext(), id);
         v.removeBookmark(b);
     }
     
-    public void modifyBookmark(IRequestCycle cycle)
+    public void modifyBookmark(final IRequestCycle cycle)
     {
-        ObjectId id = (ObjectId) cycle.getServiceParameters()[0];
-        Bookmark b = (Bookmark) DataObjectUtils.objectForPK(getDataContext(), id);
+        final ObjectId id = (ObjectId) cycle.getServiceParameters()[0];
+        final Bookmark b = (Bookmark) DataObjectUtils.objectForPK(getDataContext(), id);
         
-        AddBookmark ab = (AddBookmark) cycle.getPage("AddBookmark");
+        final AddBookmark ab = (AddBookmark) cycle.getPage("AddBookmark");
         ab.setBookmark(b);
         cycle.activate(ab);
     }
     
-    public void pageBeginRender(PageEvent event) 
+    public void pageBeginRender(final PageEvent event) 
     {
-        Visit v = (Visit) getVisit();
-        Category c = v.getCategory();
+        final Visit v = (Visit) getVisit();
+        final Category c = v.getCategory();
         
         if (c != null)
         {

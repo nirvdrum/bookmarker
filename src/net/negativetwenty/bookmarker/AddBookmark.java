@@ -57,10 +57,10 @@ public abstract class AddBookmark extends SecureApplicationPage
 	}
 	
 	// TODO This should be refactored to be a different name, since it is also used to modify existing bookmarks.
-	public void addBookmark(IRequestCycle cycle)
+	public void addBookmark(final IRequestCycle cycle)
 	{
-		DataContext dc = getDataContext();
-		Bookmark b = getBookmark();
+		final DataContext dc = getDataContext();
+		final Bookmark b = getBookmark();
 		
 		// If this is a new bookmark (an existing one -- indicating a modification -- would not have a null objectID) . . .
 		if (b.getObjectId() == null)
@@ -89,9 +89,9 @@ public abstract class AddBookmark extends SecureApplicationPage
 	    cycle.activate("Home");
 	}
 	
-	public void pageBeginRender(PageEvent event)
+	public void pageBeginRender(final PageEvent event)
 	{	
-	    Visit v = (Visit) getVisit();
+	    final Visit v = (Visit) getVisit();
 	    
 	    // If the bookmark object is null, create a new one.
 		if (getBookmark() == null)
@@ -120,31 +120,31 @@ public abstract class AddBookmark extends SecureApplicationPage
 	public void createRdf()
 	{
 	    // Get a list of all the bookmarks.
-        SelectQuery query = new SelectQuery(Bookmark.class);
-        List bookmarks = getDataContext().performQuery(query);
-        Visit v = (Visit) getVisit();
+        final SelectQuery query = new SelectQuery(Bookmark.class);
+        final List bookmarks = getDataContext().performQuery(query);
+        final Visit v = (Visit) getVisit();
 	    
 	    try
 	    {
 	        // Set things up for creating the RDF file.
-	        ChannelBuilderIF builder = new ChannelBuilder();
-	        ChannelIF channel = builder.createChannel("Bookmarks");
+	        final ChannelBuilderIF builder = new ChannelBuilder();
+	        final ChannelIF channel = builder.createChannel("Bookmarks");
 	        channel.setDescription("Test Channel: " + "Bookmarks");
 	        
 	        // For each bookmark . . .
-	        Iterator it = bookmarks.iterator();
+	        final Iterator it = bookmarks.iterator();
 	        while (it.hasNext())
 	        {
-	            Bookmark b = (Bookmark) it.next();
+	            final Bookmark b = (Bookmark) it.next();
 	            
 	            // create an item for the RDF file . . .
-	            Item item = new Item(b.getTitle(), b.getDescription(), new URL(b.getUrl()));
+	            final Item item = new Item(b.getTitle(), b.getDescription(), new URL(b.getUrl()));
 	            
 	            // TODO When I finally force Bookmarks to have some category, the category name should never be null.
 	            // if the bookmark has an associated category, create that category for the item in RDF . . .
 	            if (b.getCategory() != null)
 	            {
-	                CategoryIF category = new de.nava.informa.impl.basic.Category(b.getCategory().getName());
+	                final CategoryIF category = new de.nava.informa.impl.basic.Category(b.getCategory().getName());
 	                channel.addCategory(category);
 	                item.addCategory(category);
 	            }
@@ -158,11 +158,11 @@ public abstract class AddBookmark extends SecureApplicationPage
 	        }
 
 	        // Actually create the RDF file now.
-	        String rdffile = getRequestCycle().getRequestContext().getServlet().getServletContext().getRealPath(getComponent("border").getAsset("rdffile").getResourceLocation().getPath());
-	        ChannelExporterIF exporter = new RSS_2_0_Exporter(rdffile);
+	        final String rdffile = getRequestCycle().getRequestContext().getServlet().getServletContext().getRealPath(getComponent("border").getAsset("rdffile").getResourceLocation().getPath());
+	        final ChannelExporterIF exporter = new RSS_2_0_Exporter(rdffile);
 	        exporter.write(channel);
 	    }
-	    catch (Exception e)
+	    catch (final Exception e)
 	    {
 	        e.printStackTrace();
 	    }

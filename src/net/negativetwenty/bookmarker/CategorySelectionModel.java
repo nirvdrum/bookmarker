@@ -39,9 +39,9 @@ public class CategorySelectionModel implements IPropertySelectionModel
 {
 	List categories = null;
 	
-	public CategorySelectionModel(DataContext dataContext)
+	public CategorySelectionModel(final DataContext dataContext)
 	{
-		SelectQuery query = new SelectQuery(Category.class);
+	    final SelectQuery query = new SelectQuery(Category.class);
 		
 		categories = new ArrayList();
 		categories.add("N/A");
@@ -59,7 +59,7 @@ public class CategorySelectionModel implements IPropertySelectionModel
 	/* (non-Javadoc)
 	 * @see org.apache.tapestry.form.IPropertySelectionModel#getOption(int)
 	 */
-	public Object getOption(int index) 
+	public Object getOption(final int index) 
 	{
 		if (index == 0)
 		{
@@ -72,21 +72,21 @@ public class CategorySelectionModel implements IPropertySelectionModel
 	/* (non-Javadoc)
 	 * @see org.apache.tapestry.form.IPropertySelectionModel#getLabel(int)
 	 */
-	public String getLabel(int index) 
+	public String getLabel(final int index) 
 	{
 		if (index == 0)
 		{
 			return (String) categories.get(index);
 		}
 		
-		Category c = (Category) categories.get(index);	
+		final Category c = (Category) categories.get(index);	
 		return c.getName();
 	}
 
 	/* (non-Javadoc)
 	 * @see org.apache.tapestry.form.IPropertySelectionModel#getValue(int)
 	 */
-	public String getValue(int index) 
+	public String getValue(final int index) 
 	{
 		return Integer.toString(index);
 	}
@@ -94,9 +94,9 @@ public class CategorySelectionModel implements IPropertySelectionModel
 	/* (non-Javadoc)
 	 * @see org.apache.tapestry.form.IPropertySelectionModel#translateValue(java.lang.String)
 	 */
-	public Object translateValue(String value) 
+	public Object translateValue(final String value) 
 	{
-		int index = Integer.parseInt(value);
+	    final int index = Integer.parseInt(value);
 		
 		return getOption(index);
 	}

@@ -41,11 +41,11 @@ public class Global implements Serializable
         // Start up the HSQLDB server if configured to do so in the .application file.
         if(propertySource != null && propertySource.getPropertyValue("start-database-server").equals("true"))
         {
-            String alias = propertySource.getPropertyValue("database-alias");
-            String file  = propertySource.getPropertyValue("database-file");
-            String port  = propertySource.getPropertyValue("database-port");
+            final String alias = propertySource.getPropertyValue("database-alias");
+            final String file  = propertySource.getPropertyValue("database-file");
+            final String port  = propertySource.getPropertyValue("database-port");
             
-            String properties = "database.0=file:" + file + ";dbname.0=" + alias;
+            final String properties = "database.0=file:" + file + ";dbname.0=" + alias;
             
             server = new Server();
             
