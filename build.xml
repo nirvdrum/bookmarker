@@ -29,7 +29,7 @@
 	<target name="init">
 		<mkdir dir="${build.dir}"/>
 		<mkdir dir="${build.classes}"/>
-		
+		<touch file="${context.dir}/bookmarks.rdf"/>
 		
 		<taskdef name="cgen" classname="org.objectstyle.cayenne.tools.CayenneGenerator">
 		     <classpath refid="classpath"/>
@@ -39,6 +39,7 @@
 	
 	<target name="clean">
 		<delete dir="${build.dir}"/>
+		<delete file="${context.dir}/bookmarks.rdf"/>
 	</target>
 	
 	<target name="compile" depends="clean,init">
