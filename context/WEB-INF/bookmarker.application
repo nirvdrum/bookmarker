@@ -4,9 +4,12 @@
 <application engine-class="net.negativetwenty.bookmarker.EnhancedEngine" name="bookmarker">
 
     <description>A webapp for managing web page bookmarks.</description>
-
+  
     <property name="org.apache.tapestry.visit-class">net.negativetwenty.bookmarker.Visit</property>
     <property name="org.apache.tapestry.global-class">net.negativetwenty.bookmarker.Global</property>
+    
+    <property name="org.apache.tapestry.page-url-suffix" value=".html"/>
+    <property name="org.apache.tapestry.service-url-suffix" value=".do"/>
     
     <!-- HSQLDB properties -->
     <property name="start-database-server" value="true"/>
@@ -28,5 +31,5 @@
 
 	<component-type specification-path="/WEB-INF/Border.jwc" type="Border"/>
 <component-type specification-path="/WEB-INF/UserAuthPanel.jwc" type="UserAuthPanel"/>
-
+   
 </application>

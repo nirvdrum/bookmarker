@@ -2,8 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/tapestry-contrib-3.0.jar"/>
-	<classpathentry kind="lib" path="lib/tapestry-3.0.jar"/>
 	<classpathentry kind="lib" path="lib/javassist-2.5.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-fileupload-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/bsf-2.3.0.jar"/>
@@ -18,6 +16,8 @@
 	<classpathentry kind="lib" path="lib-standalone/javax.servlet.jar"/>
 	<classpathentry kind="lib" path="lib-standalone/jasper-runtime.jar"/>
 	<classpathentry kind="lib" path="lib-standalone/jasper-compiler.jar"/>
-	<classpathentry kind="lib" path="lib/cayenne.jar"/>
+	<classpathentry sourcepath="/cayenne" kind="lib" path="lib/cayenne.jar"/>
+	<classpathentry kind="lib" path="lib/tapestry-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/tapestry-contrib-3.0.1.jar"/>
 	<classpathentry kind="output" path="context/WEB-INF/classes"/>
 </classpath>
