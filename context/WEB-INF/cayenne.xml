@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<domains project-version="1.1">
+<domain name="DefaultDomain">
+	<map name="DefaultMap" location="DefaultMap.map.xml"/>
+
+	<node name="DefaultNode"
+		 datasource="DefaultNode.driver.xml"
+		 adapter="org.objectstyle.cayenne.dba.mysql.MySQLAdapter"
+		 factory="org.objectstyle.cayenne.conf.DriverDataSourceFactory">
+			<map-ref name="DefaultMap"/>
+	 </node>
+</domain>
+</domains>

@@ -1,0 +1,60 @@
+BODY
+{
+	background: rgb(0,0,0);
+	color: rgb(200,200,200);
+	font-family: verdana, serif;
+}
+
+A:link
+{
+    color: rgb(0, 200, 200);
+    text-decoration: none;
+}
+
+A:visited
+{
+    color: rgb(0, 200, 200);
+    text-decoration: none;
+}
+
+A:hover
+{
+    text-decoration: none;
+    background-color: rgb(75,75,75);
+}
+
+A:focus
+{
+	color: #660099;
+	text-decoration: none;
+}
+
+A:active
+{
+	color: #990099;
+	text-decoration: none;
+}
+
+.box
+{
+
+	border: 1px solid rgb(38, 112, 255);
+}
+
+.boxHeader
+{
+	background-color: rgb(75,75,75);
+	color: rgb(0,0,0);
+	font-weight: bold;
+}
+
+.boxContent
+{
+    color: gray;
+    background-color: rgb(50, 50, 50);
+    border: 1px solid rgb(38, 112, 255);
+}
+
+.footer
+{
+}

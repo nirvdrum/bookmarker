@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<project name="bookmarker" default="deploy" basedir=".">
+	
+	<!-- Load in external (user-configurable) properties -->
+	<property file="build.properties"/>
+	
+	<!-- Project directories -->
+	<property name="context.dir" value="context"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="src.dir" value="src"/>
+	<property name="cayenne.dir" value="${src.dir}/net/negativetwenty/bookmarker/models"/>
+	
+	<!-- Temporary build directories -->
+	<property name="build.dir" value="build"/>
+	<property name="build.classes" location="${build.dir}/classes"/>
+	
+	<!-- Global "magic" property for <javac> -->
+	<property name="build.compiler" value="modern"/>
+	
+	<path id="classpath">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset dir="${tomcat.dir}/common/lib">
+			<include name="servlet-api.jar"/>
+		</fileset>
+	</path>
+	
+	<target name="init">
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${build.classes}"/>
+		
+		
+		<taskdef name="cgen" classname="org.objectstyle.cayenne.tools.CayenneGenerator">
+		     <classpath refid="classpath"/>
+		</taskdef>
+		<cgen map="${context.dir}/WEB-INF/DefaultMap.map.xml" destDir="${src.dir}" superpkg="net.negativetwenty.bookmarker.models.auto"/>
+	</target>
+	
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+	</target>
+	
+	<target name="compile" depends="clean,init">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="classpath"/>
+		<war destfile="${build.dir}/bookmarker.war" webxml="${context.dir}/WEB-INF/web.xml">
+			<fileset dir="${context.dir}">
+				<exclude name="**/WEB-INF/web.xml"/>
+			</fileset>
+			<classes dir="${build.classes}"/>
+			<lib dir="${lib.dir}">
+				<exclude name="**/servlet-api.jar"/>
+			</lib>
+		</war>
+	</target>
+	
+	<target name="deploy" depends="compile">
+		<copy todir="${tomcat.dir}/webapps" file="${build.dir}/bookmarker.war"/>
+	</target>
+</project>

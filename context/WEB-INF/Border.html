@@ -1,0 +1,50 @@
+<html jwcid="@Shell" title="Bookmarker" stylesheet="ognl:assets.stylesheet">
+<body jwcid="@Body">
+
+    <!-- Start Header -->
+    <a href="#" jwcid="@PageLink" page="Home"><span key="header">Header.</span></a>
+    <br/><br/>
+    <!-- End Header -->
+        
+    <table width="100%">
+        <tr>
+            <!-- Start Menu Bar -->
+            <td valign="top">
+            		<span jwcid="treeView">
+					<span jwcid="treeData">
+						<span jwcid="treeNodeView"/>
+					</span>
+				</span>	
+			</td>
+            <!-- End Menu Bar -->
+            
+            <!-- Start Main Content -->
+            <td>
+				<span jwcid="@RenderBody">
+				Template HTML goes here.
+				</span>
+            </td>
+            <!-- End Main Content -->
+        </tr>
+    </table>
+
+	<!-- Start Footer -->
+    <p>
+    <table width="100%" class="footer">
+   		<tr>
+      		<td class="boxHeader"><center><span key="footer" raw="true">Copyright <a href="http://www.negativetwenty.net/">NegativeTwenty</a>, 2004.</span></center></td>
+   		</tr>
+   		<tr class="boxContent">
+  	  		<td>
+   	      		<center>
+            			<a href="http://validator.w3.org/check/referer"><img border="0" src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!" height="31" width="88"></a>
+               		<a href="http://jigsaw.w3.org/css-validator/"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!"></a>
+          		</center>
+      		</td>
+    		</tr>
+	</table>
+    </p>
+    <!-- End Footer -->
+
+</body>
+</html>

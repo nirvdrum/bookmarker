@@ -1,0 +1,32 @@
+<html>
+<body jwcid="$content$">
+<span jwcid="@Border">
+    
+    <form jwcid="@Form" listener="ognl:listeners.addBookmark">
+    <table border='1'>
+        <tr>
+            <th><span key="category">Category:</span></th>
+            <td><select jwcid="category@PropertySelection" value="ognl:category" model="ognl:categoryModel"/></td>
+        </tr>
+        <tr>
+            <th><span key="title">Title:</span></th>
+            <td><input type="text" jwcid="title@TextField" value="ognl:bookmark.title"/></td>
+        </tr>
+        <tr>
+            <th><span key="url">URL:</span></th>
+            <td><input type="text" jwcid="url@TextField" value="ognl:bookmark.url"/></td>
+        </tr>
+        <tr>
+            <th><span key="description">Description:</span></th>
+            <td><textarea jwcid="description@TextArea" value="ognl:bookmark.description"></textarea></td>
+        </tr>
+    </table>
+    <p><input type="submit" value="Add" jwcid="@Submit"/></p>
+    </form>
+    
+	<p/>
+    <a href="#" jwcid="@PageLink" page="AddCategory"><span key="addCategory">Add Category</span></a>
+    
+</span>
+</body>
+</html>
