@@ -25,7 +25,7 @@ import org.objectstyle.cayenne.util.XMLDecoder;
  *
  * @author nirvdrum
  */
-public abstract class Import extends SecureApplicationPage
+public abstract class LoadFile extends SecureApplicationPage
 {
     public abstract IUploadFile getFile();
     public abstract void setBookmarks(List bookmarks);
