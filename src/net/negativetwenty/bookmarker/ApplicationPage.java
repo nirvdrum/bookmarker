@@ -22,7 +22,6 @@
  */
 package net.negativetwenty.bookmarker;
 
-import java.net.URL;
 import java.util.*;
 
 import net.negativetwenty.bookmarker.models.*;
@@ -36,14 +35,6 @@ import org.objectstyle.cayenne.access.DataContext;
 import org.objectstyle.cayenne.exp.Expression;
 import org.objectstyle.cayenne.exp.ExpressionFactory;
 import org.objectstyle.cayenne.query.SelectQuery;
-
-import de.nava.informa.core.CategoryIF;
-import de.nava.informa.core.ChannelBuilderIF;
-import de.nava.informa.core.ChannelExporterIF;
-import de.nava.informa.core.ChannelIF;
-import de.nava.informa.exporters.*;
-import de.nava.informa.impl.basic.ChannelBuilder;
-import de.nava.informa.impl.basic.Item;
 
 /**
  * A superclass of all application pages. Contains utility methods

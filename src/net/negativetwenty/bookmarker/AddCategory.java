@@ -50,6 +50,7 @@ public abstract class AddCategory extends SecureApplicationPage implements PageR
 	
 	public void addCategory(final IRequestCycle cycle)
 	{
+	    final Visit v = (Visit) getVisit();
 	    final DataContext dc = getDataContext();
 	    final Category category = getCategory();
 		dc.registerNewObject(category);
@@ -59,6 +60,7 @@ public abstract class AddCategory extends SecureApplicationPage implements PageR
 		category.setParent(getParent());
 		
 		dc.commitChanges();
+		v.invalidateTreeModel();
 		
 		cycle.activate("Home");
 	}

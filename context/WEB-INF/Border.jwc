@@ -7,8 +7,8 @@
 <component-specification class="net.negativetwenty.bookmarker.Border" allow-body="yes" allow-informal-parameters="yes">
 
     <context-asset name="stylesheet" path="css/root.css"/>
-    <context-asset name="rdffile" path="bookmarks.rdf"/>
-
+    <context-asset name="rdffile" path="/bookmarks.rdf"/>
+    
     <property-specification name="heading" type="java.lang.String" />
     
     <bean name="metaGenerator" class="net.negativetwenty.bookmarker.MetaGenerator"/>

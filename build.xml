@@ -20,7 +20,7 @@
 	<!-- Global "magic" property for <javac> -->
 	<property name="build.compiler" value="modern"/>
 	
-	<!-- 3rd part tasks -->
+	<!-- 3rd party tasks -->
 	<taskdef name="cdbgen" classname="org.objectstyle.cayenne.tools.DbGeneratorTask">
 	     <classpath refid="classpath"/>
 	</taskdef>
