@@ -24,11 +24,11 @@ import org.objectstyle.cayenne.query.SelectQuery;
 
 public class Visit implements Serializable 
 {
-	private DataContext dataContext = null;
-	private ITreeModel treeModel = null;
-	private List bookmarks = null;
-	private Category category = null;
-	private boolean loggedIn = false;
+	protected DataContext dataContext = null;
+	protected ITreeModel treeModel = null;
+	protected List bookmarks = null;
+	protected Category category = null;
+	protected User user = null;
 	
 	public Visit() 
 	{
@@ -42,26 +42,9 @@ public class Visit implements Serializable
 		return dataContext;
 	}
 	
-	public boolean authenticate(String username, String password)
-	{
-	    String tempUser = "admin";
-	    String tempPass = "password";
-	    
-	    if (username.equals(tempUser) && password.equals(tempPass))
-	    {
-	        loggedIn = true;
-	    }
-	    else
-	    {
-	        loggedIn = false;
-	    }
-	    
-	    return loggedIn;
-	}
-	
 	public boolean isLoggedIn()
 	{
-	    return loggedIn;
+	    return (user != null);
 	}
 	
 	public ITreeModel getTreeModel()
@@ -84,7 +67,7 @@ public class Visit implements Serializable
 	    return treeModel;
 	}
 	
-	protected void buildTree(List children, TreeNode root)
+	protected void buildTree(final List children, final TreeNode root)
 	{
 	    Iterator it = children.iterator();
 	    while (it.hasNext())
@@ -103,13 +86,15 @@ public class Visit implements Serializable
     {
         return bookmarks;
     }
+    
     /**
      * @param bookmarks The bookmarks to set.
      */
-    public void setBookmarks(List bookmarks)
+    public void setBookmarks(final List bookmarks)
     {
         this.bookmarks = bookmarks;
     }
+    
     /**
      * @return Returns the category.
      */
@@ -117,18 +102,35 @@ public class Visit implements Serializable
     {
         return category;
     }
+    
     /**
      * @param category The category to set.
      */
-    public void setCategory(Category category)
+    public void setCategory(final Category category)
     {
         this.category = category;
     }
     
-    public void removeBookmark(Bookmark b)
+    public void removeBookmark(final Bookmark b)
     {
         bookmarks.remove(b);
         dataContext.deleteObject(b);
         dataContext.commitChanges();
+    }
+    
+    /**
+     * @return Returns the user.
+     */
+    public User getUser()
+    {
+        return user;
+    }
+    
+    /**
+     * @param user The user to set.
+     */
+    public void setUser(final User user)
+    {
+        this.user = user;
     }
 }

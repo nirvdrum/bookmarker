@@ -9,7 +9,7 @@ package net.negativetwenty.bookmarker;
 import java.net.*;
 import java.util.*;
 
-import net.negativetwenty.bookmarker.models.Bookmark;
+import net.negativetwenty.bookmarker.models.*;
 import net.negativetwenty.bookmarker.models.Category;
 
 import org.apache.tapestry.IRequestCycle;
@@ -47,9 +47,11 @@ public abstract class AddBookmark extends SecureApplicationPage
 		
 		if (b.getObjectId() == null)
 		{
-		    b.setClickCount(new Integer(0));
-		
 		    dc.registerNewObject(b);
+		    
+		    b.setClickCount(new Integer(0));
+		    b.setCreated(new Date());
+		    b.setCreatedBy(getUser());
 		}
 		
 		b.setCategory(getCategory());
@@ -85,7 +87,6 @@ public abstract class AddBookmark extends SecureApplicationPage
 	
 	public void createRdf()
 	{
-	    DataContext dc = getDataContext();
         SelectQuery query = new SelectQuery(Bookmark.class);
         List bookmarks = getDataContext().performQuery(query); 
 	    

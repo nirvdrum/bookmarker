@@ -9,7 +9,7 @@ package net.negativetwenty.bookmarker;
 import java.net.URL;
 import java.util.*;
 
-import net.negativetwenty.bookmarker.models.Bookmark;
+import net.negativetwenty.bookmarker.models.*;
 import net.negativetwenty.bookmarker.models.Category;
 
 import org.apache.tapestry.*;
@@ -47,6 +47,15 @@ public class ApplicationPage extends BasePage implements PageRenderListener, ITr
     }
 
     /**
+     * Helper method to simplify obtaining the currently logged-in user by subclasses.
+     */
+    protected User getUser() 
+    {
+        Visit visit = (Visit) getVisit();
+        return visit.getUser();
+    }
+    
+    /**
      * Implementation of PageRenderListener. In Tapestry 3.0 implementing PageRenderListener
      * seems to be the only way to catch the last chance to reinitialize persistent variables
      * before page rendering starts. Default implementation of this method does nothing,
@@ -77,50 +86,5 @@ public class ApplicationPage extends BasePage implements PageRenderListener, ITr
 		        throw new PageRedirectException("ViewBookmarks");
 		    }
 		}
-		
-		createRdf();
-	}
-	
-	public void createRdf()
-	{
-	    DataContext dc = getDataContext();
-        SelectQuery query = new SelectQuery(Bookmark.class);
-        List bookmarks = getDataContext().performQuery(query); 
-	    
-	    try
-	    {
-	        ChannelBuilderIF builder = new ChannelBuilder();
-	        ChannelIF channel = builder.createChannel("Bookmarks");
-	        channel.setDescription("Test Channel: " + "Bookmarks");
-	        
-	        Iterator it = bookmarks.iterator();
-	        while (it.hasNext())
-	        {
-	            Bookmark b = (Bookmark) it.next();
-	            
-	            Item item = new Item(b.getTitle(), b.getDescription(), new URL(b.getUrl()));
-	            
-	            // TODO When I finally force Bookmarks to have some category, the category name should never be null.
-	            if (b.getCategory() != null)
-	            {
-	                CategoryIF category = new de.nava.informa.impl.basic.Category(b.getCategory().getName());
-	                channel.addCategory(category);
-	                item.addCategory(category);
-	            }
-	            
-	            // TODO Update this to whatever the logged in username is.
-	            item.setCreator("nirvdrum");
-	            
-	            channel.addItem(item);
-	        }
-
-	        String rdffile = getRequestCycle().getRequestContext().getServlet().getServletContext().getRealPath(getComponent("border").getAsset("rdffile").getResourceLocation().getPath());
-	        ChannelExporterIF exporter = new RSS_1_0_Exporter(rdffile);
-	        exporter.write(channel);
-	    }
-	    catch (Exception e)
-	    {
-	        e.printStackTrace();
-	    }
 	}
 }

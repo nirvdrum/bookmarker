@@ -4,29 +4,51 @@
 	<db-entity name="Bookmark">
 		<db-attribute name="category_id" type="INTEGER"/>
 		<db-attribute name="clickCount" type="INTEGER"/>
+		<db-attribute name="created" type="TIMESTAMP" isMandatory="true"/>
 		<db-attribute name="description" type="VARCHAR" length="255"/>
 		<db-attribute name="id" type="INTEGER" isPrimaryKey="true" isMandatory="true"/>
 		<db-attribute name="title" type="VARCHAR" isMandatory="true" length="255"/>
 		<db-attribute name="url" type="VARCHAR" isMandatory="true" length="255"/>
+		<db-attribute name="user_id" type="INTEGER" isMandatory="true"/>
 	</db-entity>
 	<db-entity name="Category">
+		<db-attribute name="created" type="TIMESTAMP" isMandatory="true"/>
 		<db-attribute name="description" type="VARCHAR" length="255"/>
 		<db-attribute name="id" type="INTEGER" isPrimaryKey="true" isMandatory="true"/>
 		<db-attribute name="name" type="VARCHAR" isMandatory="true" length="255"/>
 		<db-attribute name="parent_id" type="INTEGER"/>
+		<db-attribute name="user_id" type="INTEGER" isMandatory="true"/>
+	</db-entity>
+	<db-entity name="User">
+		<db-attribute name="created" type="TIMESTAMP" isMandatory="true"/>
+		<db-attribute name="fullName" type="VARCHAR" length="255"/>
+		<db-attribute name="id" type="INTEGER" isPrimaryKey="true" isMandatory="true"/>
+		<db-attribute name="password" type="VARCHAR" isMandatory="true" length="50"/>
+		<db-attribute name="username" type="VARCHAR" isMandatory="true" length="50"/>
 	</db-entity>
 	<obj-entity name="Bookmark" className="net.negativetwenty.bookmarker.models.Bookmark" dbEntityName="Bookmark">
 		<obj-attribute name="clickCount" type="java.lang.Integer" db-attribute-path="clickCount"/>
+		<obj-attribute name="created" type="java.util.Date" db-attribute-path="created"/>
 		<obj-attribute name="description" type="java.lang.String" db-attribute-path="description"/>
 		<obj-attribute name="title" type="java.lang.String" db-attribute-path="title"/>
 		<obj-attribute name="url" type="java.lang.String" db-attribute-path="url"/>
 	</obj-entity>
 	<obj-entity name="Category" className="net.negativetwenty.bookmarker.models.Category" lock-type="optimistic" dbEntityName="Category">
+		<obj-attribute name="created" type="java.util.Date" db-attribute-path="created"/>
 		<obj-attribute name="description" type="java.lang.String" db-attribute-path="description"/>
 		<obj-attribute name="name" type="java.lang.String" db-attribute-path="name"/>
 	</obj-entity>
+	<obj-entity name="User" className="net.negativetwenty.bookmarker.models.User" lock-type="optimistic" dbEntityName="User">
+		<obj-attribute name="created" type="java.util.Date" db-attribute-path="created"/>
+		<obj-attribute name="fullName" type="java.lang.String" db-attribute-path="fullName"/>
+		<obj-attribute name="password" type="java.lang.String" db-attribute-path="password"/>
+		<obj-attribute name="username" type="java.lang.String" db-attribute-path="username"/>
+	</obj-entity>
 	<db-relationship name="category" source="Bookmark" target="Category" toMany="false">
 		<db-attribute-pair source="category_id" target="id"/>
+	</db-relationship>
+	<db-relationship name="createdBy" source="Bookmark" target="User" toMany="false">
+		<db-attribute-pair source="user_id" target="id"/>
 	</db-relationship>
 	<db-relationship name="bookmarks" source="Category" target="Bookmark" toMany="true">
 		<db-attribute-pair source="id" target="category_id"/>
@@ -34,11 +56,28 @@
 	<db-relationship name="children" source="Category" target="Category" toMany="true">
 		<db-attribute-pair source="id" target="parent_id"/>
 	</db-relationship>
+	<db-relationship name="createdBy" source="Category" target="User" toMany="false">
+		<db-attribute-pair source="user_id" target="id"/>
+	</db-relationship>
 	<db-relationship name="parent" source="Category" target="Category" toMany="false">
 		<db-attribute-pair source="parent_id" target="id"/>
 	</db-relationship>
+	<db-relationship name="myBookmarks" source="User" target="Bookmark" toMany="true">
+		<db-attribute-pair source="id" target="user_id"/>
+	</db-relationship>
+	<db-relationship name="myCategories" source="User" target="Category" toMany="true">
+		<db-attribute-pair source="id" target="user_id"/>
+	</db-relationship>
 	<obj-relationship name="category" source="Bookmark" target="Category" db-relationship-path="category"/>
+	<obj-relationship name="createdBy" source="Bookmark" target="User" db-relationship-path="createdBy"/>
 	<obj-relationship name="bookmarks" source="Category" target="Bookmark" db-relationship-path="bookmarks"/>
 	<obj-relationship name="children" source="Category" target="Category" db-relationship-path="children"/>
+	<obj-relationship name="createdBy" source="Category" target="User" db-relationship-path="createdBy"/>
 	<obj-relationship name="parent" source="Category" target="Category" db-relationship-path="parent"/>
+	<obj-relationship name="myBookmarks" source="User" target="Bookmark" db-relationship-path="myBookmarks"/>
+	<obj-relationship name="myCategories" source="User" target="Category" db-relationship-path="myCategories"/>
+	<query name="UserLogin" factory="org.objectstyle.cayenne.map.SelectQueryBuilder" root="obj-entity" root-name="User">
+		<property name="cayenne.GenericSelectQuery.fetchLimit" value="1"/>
+		<qualifier><![CDATA[(username = $username) and (password = $password)]]></qualifier>
+	</query>
 </data-map>

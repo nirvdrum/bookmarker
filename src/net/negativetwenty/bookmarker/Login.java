@@ -10,6 +10,8 @@ import org.apache.tapestry.*;
 import org.apache.tapestry.callback.ICallback;
 import org.apache.tapestry.html.BasePage;
 
+import net.negativetwenty.bookmarker.models.*;
+
 /**
  * @author nirvdrum
  *
@@ -27,7 +29,8 @@ public abstract class Login extends BasePage
     {
         final Visit v = (Visit) getVisit();
         
-        v.authenticate(getUsername(), getPassword());
+        User user = User.login(v.getDataContext(), getUsername(), getPassword());
+        v.setUser(user);
         
         if (callback == null)
         {

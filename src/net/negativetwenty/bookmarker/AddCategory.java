@@ -36,8 +36,10 @@ public abstract class AddCategory extends SecureApplicationPage implements PageR
 	{
 		DataContext dc = getDataContext();
 		Category category = getCategory();
-		
 		dc.registerNewObject(category);
+		
+		category.setCreated(new java.util.Date());
+		category.setCreatedBy(getUser());
 		category.setParent(getParent());
 		
 		dc.commitChanges();

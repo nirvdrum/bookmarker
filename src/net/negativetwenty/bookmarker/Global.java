@@ -18,10 +18,11 @@ import org.hsqldb.Server;
  */
 public class Global implements Serializable
 {
-    final Server server;
+    protected final Server server;
     
     public Global(final IPropertySource propertySource)
     {
+        // Start up the HSQLDB server if configured to do so in the .application file.
         if(propertySource != null && propertySource.getPropertyValue("start-database-server").equals("true"))
         {
             String alias = propertySource.getPropertyValue("database-alias");
