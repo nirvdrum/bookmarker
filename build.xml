@@ -73,11 +73,11 @@
 		
 		<!-- Create the standalone app's directory structure. -->
 		<mkdir dir="${standalone.dir}"/>
-		<mkdir dir="${standalone.dir}/db"/>
+		<mkdir dir="${standalone.dir}/${standalone-db.dir}"/>
 		<mkdir dir="${standalone.dir}/lib"/>
 		
 		<!-- Get all the libs the standalone app requires. -->
-		<copy todir="${standalone.dir}/db">
+		<copy todir="${standalone.dir}/${standalone-db.dir}">
 			<fileset dir="${db.dir}"/>
 		</copy>
 		

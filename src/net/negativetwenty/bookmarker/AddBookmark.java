@@ -149,8 +149,11 @@ public abstract class AddBookmark extends SecureApplicationPage
 	                item.addCategory(category);
 	            }
 	            
-	            // indicate the creator of the item and then add it to the RDF file.
+	            // Update a few other RDF properties.
 	            item.setCreator(v.getUser().getUsername());
+	            item.setDate(b.getCreated());
+	            
+	            // Add the RDF item to the RDF output.
 	            channel.addItem(item);
 	        }
 
