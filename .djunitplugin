@@ -1,0 +1,13 @@
+#djUnit Plugin Settings
+#Sat Oct 30 19:39:31 EDT 2004
+CoverageIncludedPatterns=
+JUnitExcludedUseDefault=true
+UseTrace=false
+PrintMethodTrace=false
+CoverageExcludedPatterns=
+UseVirtualMock=false
+UseCoverage=true
+PrintCatchTrace=false
+TraceIncludePatterns=
+PrintIndent=false
+CoverageWorkingDirectory=

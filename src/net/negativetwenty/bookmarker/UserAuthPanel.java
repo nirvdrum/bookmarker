@@ -21,13 +21,24 @@ public abstract class UserAuthPanel extends BaseComponent
     public abstract String getPassword();
     public abstract boolean getVerifypw();
     public abstract String getVerifyPassword();
+    public abstract void setErrorMessage(String errorMessage);
     
     public void submit(final IRequestCycle cycle)
     {
-        boolean verifypw = getVerifypw();
-        String username = getUsername();
-        String password = getPassword();
-        String venrifyhePassword = getVerifyPassword();
+        final boolean verifypw = getVerifypw();
+        
+        if (verifypw == true)
+        {
+            String password = getPassword();
+            String verifyPassword = getVerifyPassword();
+            
+            // TODO We want to show some sort of error message no doubt.
+            if (password.equals(verifyPassword) == false)
+            {
+                setErrorMessage("The passwords do not match up.  Please try again.");
+                return;
+            }
+        }
         
         getListener().actionTriggered(this, cycle);
     }

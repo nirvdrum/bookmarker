@@ -15,6 +15,7 @@
     <parameter name="password" type="java.lang.String" direction="auto" required="yes"/>
     <parameter name="listener" type="org.apache.tapestry.IActionListener" direction="in" required="yes"/>
     
+    <property-specification name="errorMessage" type="java.lang.String"/>
     <property-specification name="verifyPassword" type="java.lang.String"/>
     
 </component-specification>

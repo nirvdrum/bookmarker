@@ -1,7 +1,17 @@
- <form jwcid="@Form" listener="ognl:listeners.submit">
+<div jwcid="@Conditional" condition="ognl:errorMessage" element="div">
+	<h1><span jwcid="@InsertText" value="ognl:errorMessage"/></h1>
+</div>
+
+<form jwcid="@Form" listener="ognl:listeners.submit">
 	<span class="label">Username:</span>
     <input type="text" jwcid="@TextField" value="ognl:username"/><br/>
     <span class="label">Password:</span>
     <input type="password" jwcid="@TextField" hidden="true" value="ognl:password"/><br/>
+    
+    <span jwcid="@Conditional" condition="ognl:verifypw">
+       <span class="label">Verify Password:</span>
+       <input type="password" jwcid="@TextField" hidden="true" value="ognl:verifyPassword"/><br/> 
+    </span>
+    
     <input type="submit" jwcid="@Submit"/>
 </form>
