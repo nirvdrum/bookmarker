@@ -23,8 +23,14 @@
     	
         <br/>
         
-        <span jwcid="isLoggedIn@Conditional" condition="ognl:!page.visit.loggedIn">
-            <a href="#" jwcid="login@DirectLink" listener="ognl:listeners.login">Login</a>
+        <!-- If not logged in, then show a "Login" link. -->
+        <span jwcid="isLoggedNotIn@Conditional" condition="ognl:!page.visit.loggedIn">
+            <a href="#" jwcid="login@DirectLink" listener="ognl:listeners.login"><span key="login">Login</span></a>
+        </span>
+        
+        <!-- If logged in, then show a "Logout" link. -->
+        <span jwcid="isLoggedIn@Conditional" condition="ognl:page.visit.loggedIn">
+            <a href="#" jwcid="logout@DirectLink" listener="ognl:listeners.logout"><span key="logout">Logout</span></a>
         </span>
     </div>
     <!-- End Menu Bar -->

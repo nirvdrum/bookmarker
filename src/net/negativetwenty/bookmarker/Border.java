@@ -24,6 +24,13 @@ public class Border extends BaseComponent
         throw new PageRedirectException(login);
     }
     
+    public void logout(IRequestCycle cycle)
+    {
+        Visit v = (Visit) getPage().getVisit();
+        v.setUser(null);
+        cycle.activate("Home");
+    }
+    
     public void addBookmark(IRequestCycle cycle)
     {
         AddBookmark ab = (AddBookmark) cycle.getPage("AddBookmark");
