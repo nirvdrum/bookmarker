@@ -3,24 +3,14 @@
 <span jwcid="border@Border">
     
     <form jwcid="@Form" listener="ognl:listeners.addBookmark">
-    <table border='1'>
-        <tr>
-            <th><span key="category">Category:</span></th>
-            <td><select jwcid="category@PropertySelection" value="ognl:category" model="ognl:categoryModel"/></td>
-        </tr>
-        <tr>
-            <th><span key="title">Title:</span></th>
-            <td><input type="text" jwcid="title@TextField" value="ognl:bookmark.title"/></td>
-        </tr>
-        <tr>
-            <th><span key="url">URL:</span></th>
-            <td><input type="text" jwcid="url@TextField" value="ognl:bookmark.url"/></td>
-        </tr>
-        <tr>
-            <th><span key="description">Description:</span></th>
-            <td><textarea jwcid="description@TextArea" value="ognl:bookmark.description"></textarea></td>
-        </tr>
-    </table>
+        <span key="category" class="label">Category:</span>
+        <select jwcid="category@PropertySelection" value="ognl:category" model="ognl:categoryModel"/><br/>
+        <span key="title" class="label">Title:</span>
+        <input type="text" jwcid="title@TextField" value="ognl:bookmark.title"/><br/>
+        <span key="url" class="label">URL:</span>
+        <input type="text" jwcid="url@TextField" value="ognl:bookmark.url"/><br/>
+        <span key="description" class="label">Description:</span>
+        <textarea jwcid="description@TextArea" value="ognl:bookmark.description"></textarea><br/>
     <p><input type="submit" value="Add" jwcid="@Submit"/></p>
     </form>
     

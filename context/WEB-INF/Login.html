@@ -1,15 +1,18 @@
 <html>
 <head>
-
+  <LINK REL="StyleSheet" HREF="../../css/root.css" TYPE="text/css">
 </head>
-
-<body>
+<body jwcid="$content$">
+<span jwcid="@Border">
 
     <form jwcid="@Form" listener="ognl:listeners.login">
-        Username: <input type="text" jwcid="@TextField" value="ognl:username"/><br/>
-        Password: <input type="password" jwcid="@TextField" hidden="true" value="ognl:password"/><br/>
+        <span class="label">Username:</span>
+        <input type="text" jwcid="@TextField" value="ognl:username"/><br/>
+        <span class="label">Password:</span>
+        <input type="password" jwcid="@TextField" hidden="true" value="ognl:password"/><br/>
         <input type="submit" jwcid="@Submit"/>
     </form>
-       
+
+</span>
 </body>
 </html>
