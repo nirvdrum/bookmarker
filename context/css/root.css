@@ -62,7 +62,7 @@ div#header
 	width: 100%;
 }
 
-div#header h1
+div#heading
 {
 	position: absolute;
 	width:75%;
@@ -71,6 +71,11 @@ div#header h1
 	top: 0%;
 	text-align: center;
 	margin: 15px;
+}
+
+div#heading h1
+{
+	margin: 0px;
 }
 
 div#menuBar

@@ -39,6 +39,16 @@ public abstract class ViewBookmarks extends ApplicationPage
         v.removeBookmark(b);
     }
     
+    public void modifyBookmark(IRequestCycle cycle)
+    {
+        ObjectId id = (ObjectId) cycle.getServiceParameters()[0];
+        Bookmark b = (Bookmark) DataObjectUtils.objectForPK(getDataContext(), id);
+        
+        AddBookmark ab = (AddBookmark) cycle.getPage("AddBookmark");
+        ab.setBookmark(b);
+        cycle.activate(ab);
+    }
+    
     public void pageBeginRender(PageEvent event) 
     {
         Visit v = (Visit) getVisit();

@@ -44,12 +44,17 @@ public abstract class AddBookmark extends SecureApplicationPage
 	{
 		DataContext dc = getDataContext();
 		Bookmark b = getBookmark();
-		b.setClickCount(new Integer(0));
 		
-		dc.registerNewObject(b);
+		if (b.getObjectId() == null)
+		{
+		    b.setClickCount(new Integer(0));
+		
+		    dc.registerNewObject(b);
+		}
+		
 		b.setCategory(getCategory());
-		
 		dc.commitChanges();
+		setBookmark(null);
 		
 		createRdf();
 		
@@ -58,6 +63,8 @@ public abstract class AddBookmark extends SecureApplicationPage
 	
 	public void pageBeginRender(PageEvent event)
 	{	
+	    Visit v = (Visit) getVisit();
+	    
 		if (getBookmark() == null)
 		{
 			setBookmark(new Bookmark());
@@ -65,7 +72,14 @@ public abstract class AddBookmark extends SecureApplicationPage
 		
 		if (getCategory() == null)
 		{
-			setCategory(new Category());
+		    if (v.getCategory() != null)
+		    {
+		        setCategory(v.getCategory());
+		    }
+		    else
+		    {
+		        setCategory(new Category());
+		    }
 		}
 	}
 	

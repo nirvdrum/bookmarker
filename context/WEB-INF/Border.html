@@ -5,7 +5,11 @@
     <div id="header">
     		<a href="#" jwcid="headerLink@PageLink" page="Home"><span key="header">Header.</span></a>
             
-         <h1><span jwcid="heading@InsertText" value="ognl:heading"/></h1>
+         <div id="heading"><h1><span jwcid="heading@InsertText" value="ognl:heading"/></h1>
+         <span jwcid="showAddBookmarkLink@Conditional" condition="ognl:heading">
+             <a href="#" jwcid="addBookmark@DirectLink" listener="ognl:listeners.addBookmark">Add Bookmark</a>
+         </span>
+         </div>
     </div>
     <!-- End Header -->
         
@@ -20,7 +24,7 @@
         <br/>
         
         <span jwcid="isLoggedIn@Conditional" condition="ognl:!page.visit.loggedIn">
-            <a href="#" jwcid="login@PageLink" page="Login">Login</a>
+            <a href="#" jwcid="login@DirectLink" listener="ognl:listeners.login">Login</a>
         </span>
     </div>
     <!-- End Menu Bar -->

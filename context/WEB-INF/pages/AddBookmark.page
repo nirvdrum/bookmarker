@@ -6,7 +6,7 @@
 
 <page-specification class="net.negativetwenty.bookmarker.AddBookmark">
     
-   <property-specification name="bookmark" type="net.negativetwenty.bookmarker.models.Bookmark"/>
-   <property-specification name="category" type="net.negativetwenty.bookmarker.models.Category"/> 
+   <property-specification name="bookmark" type="net.negativetwenty.bookmarker.models.Bookmark" persistent="yes"/>
+   <property-specification name="category" type="net.negativetwenty.bookmarker.models.Category"/>
     
 </page-specification>

@@ -21,7 +21,7 @@ public abstract class Login extends BasePage
     public abstract String getUsername();
     public abstract String getPassword();
     
-    protected ICallback callback;
+    protected ICallback callback = null;
     
     public void login(final IRequestCycle cycle)
     {
@@ -36,6 +36,7 @@ public abstract class Login extends BasePage
         else
         {
             callback.performCallback(cycle);
+            callback = null;
         }
     }
     
