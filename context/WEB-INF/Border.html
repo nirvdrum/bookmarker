@@ -7,7 +7,7 @@
             
          <div id="heading"><h1><span jwcid="heading@InsertText" value="ognl:heading"/></h1>
          <span jwcid="showAddBookmarkLink@Conditional" condition="ognl:heading">
-             <a href="#" jwcid="addBookmark@DirectLink" listener="ognl:listeners.addBookmark">Add Bookmark</a>
+             <a href="#" jwcid="addBookmark@DirectLink" listener="ognl:listeners.addBookmark"><span key="addBookmark">Add Bookmark</span></a>
          </span>
          </div>
     </div>
@@ -30,7 +30,14 @@
         
         <!-- If logged in, then show a "Logout" link. -->
         <span jwcid="isLoggedIn@Conditional" condition="ognl:page.visit.loggedIn">
-            <a href="#" jwcid="userAdmin@PageLink" page="ChangeAuth">Change Username/Password</a><br/><br/>
+            <a href="#" jwcid="userAdmin@PageLink" page="ChangeAuth"><span key="changeAuth">Change Username/Password</span></a><br/>
+            <br/>
+            <a href="#" jwcid="addBookmark2@PageLink" page="AddBookmark"><span key="addBookmark">Add Bookmark</span></a><br/>
+            <a href="#" jwcid="addCategory@PageLink" page="AddCategory"><span key="addCategory">Add Category</span></a><br/>
+            <br/>
+            <a href="#" jwcid="export@ServiceLink" service="bookmarker.export"><span key="exportBookmarks">Export Bookmarks</span></a><br/>
+            <a href="#" jwcid="import@PageLink" page="Import"><span key="importBookmarks">Import Bookmarks</span></a><br/>
+            <br/>
             <a href="#" jwcid="logout@DirectLink" listener="ognl:listeners.logout"><span key="logout">Logout</span></a>
         </span>
     </div>

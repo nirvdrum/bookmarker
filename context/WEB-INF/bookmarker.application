@@ -33,4 +33,7 @@
 	<component-type specification-path="/WEB-INF/Border.jwc" type="Border"/>
 <component-type specification-path="/WEB-INF/UserAuthPanel.jwc" type="UserAuthPanel"/>
    
+
+	<page name="Import" specification-path="/WEB-INF/pages/Import.page"/>
+
 </application>

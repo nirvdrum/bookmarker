@@ -1,0 +1,28 @@
+<html>
+<head>
+  <LINK REL="StyleSheet" HREF="../../css/root.css" TYPE="text/css">
+</head>
+<body jwcid="$content$">
+<span jwcid="border@Border">
+
+    <form jwcid="import@Form" listener="ognl:listeners.submit">
+        <span class="label">Select import file:</span>
+        <input type="file" jwcid="file@Upload" file="ognl:file"/><br/>
+        <input type="submit" jwcid="submit@Submit" value="Import"/>
+    </form>
+    
+    <h2 jwcid="@Conditional" condition="ognl:bookmarks" element="h2">Imported Entries:</h2>
+    
+    <br/><br/>
+    <div jwcid="bookmarks@Foreach" source="ognl:bookmarks" value="ognl:bookmark" element="div" class="box">
+         <h4>
+             <a href="#" jwcid="bookmarkLink@DirectLink" listener="ognl:listeners.linkClicked" parameters="ognl:bookmark.objectId"><span jwcid="bookmarkLinkText@InsertText" value="ognl:bookmark.title"/></a>
+         </h4>
+         <span jwcid="description@InsertText" value="ognl:bookmark.description"/>
+         <br/><br/><small><i><span key="clickCount">Click Count:</span><span jwcid="clickCount@Insert" value="ognl:bookmark.clickCount"/></i></small>
+         <br/><small><i><span key="addedBy">Added by </span><span jwcid="addedBy@Insert" value="ognl:bookmark.createdBy.username"/> on <span jwcid="created@Insert" value="ognl:bookmark.created"/></i></small>
+    </div>	
+
+</span>
+</body>
+</html>
