@@ -26,8 +26,11 @@ import net.negativetwenty.bookmarker.models.*;
 import net.negativetwenty.bookmarker.models.Category;
 
 import org.apache.tapestry.IRequestCycle;
+import org.apache.tapestry.engine.ExternalService;
+import org.apache.tapestry.engine.ILink;
 import org.apache.tapestry.event.PageEvent;
 import org.apache.tapestry.form.IPropertySelectionModel;
+import org.objectstyle.cayenne.DataObjectUtils;
 import org.objectstyle.cayenne.access.DataContext;
 import org.objectstyle.cayenne.query.SelectQuery;
 
@@ -89,7 +92,7 @@ public abstract class AddBookmark extends SecureApplicationPage
 		setBookmark(null);
 		
 		// Update the RDF file.
-		createRdf();
+		createRdf(cycle);
 		
 		// TODO This should probably be a callback, so one could add multiple bookmarks to the same category without a bunch of clicking.
 		// Go back to the home page.
@@ -132,7 +135,7 @@ public abstract class AddBookmark extends SecureApplicationPage
 	/**
 	 * Create a new RDF file to reflect changes made to the database.
 	 */
-	public void createRdf()
+	public void createRdf(final IRequestCycle cycle)
 	{
 	    // Get a list of all the bookmarks, sorted by title.
         final SelectQuery query = new SelectQuery(Bookmark.class);
@@ -153,8 +156,13 @@ public abstract class AddBookmark extends SecureApplicationPage
 	        {
 	            final Bookmark b = (Bookmark) it.next();
 	            
+	            // build an bookmarkable link for the bookmark . . .
+	            final ExternalService service = (ExternalService) cycle.getEngine().getService("external");
+	            Object[] params = new Object[] {"ViewBookmark", new Integer(DataObjectUtils.intPKForObject(b))}; 
+	            final ILink url = service.getLink(cycle, null, params);
+	            
 	            // create an item for the RDF file . . .
-	            final Item item = new Item(b.getTitle(), b.getDescription(), new URL(b.getUrl()));
+	            final Item item = new Item(b.getTitle(), b.getDescription(), new URL(url.getAbsoluteURL()));
 	            
 	            // TODO When I finally force Bookmarks to have some category, the category name should never be null.
 	            // if the bookmark has an associated category, create that category for the item in RDF . . .
@@ -165,11 +173,11 @@ public abstract class AddBookmark extends SecureApplicationPage
 	                item.addCategory(category);
 	            }
 	            
-	            // Update a few other RDF properties.
+	            // update a few other RDF properties . . .
 	            item.setCreator(v.getUser().getUsername());
 	            item.setDate(b.getCreated());
 	            
-	            // Add the RDF item to the RDF output.
+	            // and add the RDF item to the RDF output.
 	            channel.addItem(item);
 	        }
 

@@ -39,6 +39,7 @@ public class ViewBookmarks extends ApplicationPage
      * 
      * @param cycle
      */
+    // TODO This should delegate to the "ViewBookmark" page to remove duplicated work.
     public void linkClicked(final IRequestCycle cycle)
     {
         // Increment the Bookmark's click count.

@@ -22,7 +22,7 @@
     
     <service name="bookmarker.export" class="net.negativetwenty.bookmarker.services.ExportService"/>
 
-	<page name="AddBookmark" specification-path="/WEB-INF/pages/AddBookmark.page"/>
+    <page name="ViewBookmark" specification-path="pages/ViewBookmark.page"/>	<page name="AddBookmark" specification-path="/WEB-INF/pages/AddBookmark.page"/>
 <page name="AddCategory" specification-path="/WEB-INF/pages/AddCategory.page"/>
 <page name="ChangeAuth" specification-path="/WEB-INF/pages/ChangeAuth.page"/>
 <page name="Home" specification-path="/WEB-INF/pages/Home.page"/>
