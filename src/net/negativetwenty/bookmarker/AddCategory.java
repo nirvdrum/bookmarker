@@ -24,6 +24,7 @@ import net.negativetwenty.bookmarker.models.*;
 import org.apache.tapestry.*;
 import org.apache.tapestry.event.*;
 import org.apache.tapestry.form.IPropertySelectionModel;
+import org.apache.tapestry.valid.IValidationDelegate;
 import org.objectstyle.cayenne.access.DataContext;
 
 
@@ -56,6 +57,13 @@ public abstract class AddCategory extends SecureApplicationPage implements PageR
 	 */
 	public void addCategory(final IRequestCycle cycle)
 	{
+		final IValidationDelegate delegate = (IValidationDelegate) getBeans().getBean("delegate");
+		
+		if (true == delegate.getHasErrors())
+		{
+		    return;
+		}
+	    
 	    final Visit v = (Visit) getVisit();
 	    final DataContext dc = getDataContext();
 	    final Category category = getCategory();

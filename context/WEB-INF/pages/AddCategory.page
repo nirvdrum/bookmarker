@@ -9,4 +9,16 @@
     <property-specification name="category" type="net.negativetwenty.bookmarker.models.Category"/>
     <property-specification name="parent" type="net.negativetwenty.bookmarker.models.Category"/>
 
+    <bean name="delegate" class="net.negativetwenty.bookmarker.valid.BookmarkerDelegate"/>
+   
+    <bean name="required" class="org.apache.tapestry.valid.StringValidator" lifecycle="page">
+        <set-property name="required" expression="true"/>
+    </bean>
+    
+    <component id="name" type="ValidField">
+        <message-binding name="displayName" key="name"/>
+        <binding name="validator" expression="beans.required"/>
+        <binding name="value" expression="category.name"/>
+    </component> 
+   
 </page-specification>

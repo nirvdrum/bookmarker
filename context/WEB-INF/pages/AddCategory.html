@@ -2,14 +2,17 @@
 <body jwcid="$content$">
 <span jwcid="border@Border">
     
-    <form jwcid="@Form" listener="ognl:listeners.addCategory">
+    <form jwcid="@Form" listener="ognl:listeners.addCategory" delegate="ognl:beans.delegate">
         <span key="parent" class="label">Parent:</span>
         <select jwcid="parent@PropertySelection" value="ognl:parent" model="ognl:categoryModel"/><br/>
-        <span key="name" class="label">Name:</span>
-        <input type="text" jwcid="name@TextField" value="ognl:category.name" size="20"/><br/>
+        
+        <span jwcid="@FieldLabel" class="label" field="ognl:components.name">Name:</span>
+        <input type="text" jwcid="name" size="20"/><br/>
+        
         <span key="description" class="label">Description:</span>
         <textarea rows="10" jwcid="description@TextArea" value="ognl:category.description"></textarea><br/>
-    <p><input type="submit" value="Add" jwcid="@Submit"/></p>
+    
+        <p><input type="submit" value="Add" jwcid="@Submit"/></p>
     </form>
     
 </span>

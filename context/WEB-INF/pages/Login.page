@@ -11,4 +11,6 @@
     <property-specification name="username" type="java.lang.String"/>
     <property-specification name="password" type="java.lang.String"/>
     
+    <bean name="delegate" class="net.negativetwenty.bookmarker.valid.BookmarkerDelegate"/>
+    
 </page-specification>

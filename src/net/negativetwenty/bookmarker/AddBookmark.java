@@ -30,6 +30,7 @@ import org.apache.tapestry.engine.ExternalService;
 import org.apache.tapestry.engine.ILink;
 import org.apache.tapestry.event.PageEvent;
 import org.apache.tapestry.form.IPropertySelectionModel;
+import org.apache.tapestry.valid.IValidationDelegate;
 import org.objectstyle.cayenne.DataObjectUtils;
 import org.objectstyle.cayenne.access.DataContext;
 import org.objectstyle.cayenne.query.SelectQuery;
@@ -69,6 +70,14 @@ public abstract class AddBookmark extends SecureApplicationPage
 	// TODO This should be refactored to be a different name, since it is also used to modify existing bookmarks.
 	public void addBookmark(final IRequestCycle cycle)
 	{
+		final IValidationDelegate delegate = (IValidationDelegate) getBeans().getBean("delegate");
+		
+		if (true == delegate.getHasErrors())
+		{
+		    return;
+		}
+
+		
 		final DataContext dc = getDataContext();
 		final Bookmark b = getBookmark();
 		

@@ -56,7 +56,7 @@ public abstract class Login extends ApplicationPage
         
         // This is pretty ghetto, but I haven't thought much of a better way to do this yet (probably an ant task will do).
         // The basic idea is that there aren't any user accounts, then register the default one.
-        if (user == null && getUsername().equals("admin") && getPassword().equals("password"))
+        if (user == null && getUsername() != null && getPassword() != null && getUsername().equals("admin") && getPassword().equals("password"))
         {
              // Get the list of all users.
              final SelectQuery query = new SelectQuery(User.class);

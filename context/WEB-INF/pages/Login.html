@@ -5,7 +5,7 @@
 <body jwcid="$content$">
 <span jwcid="border@Border">
   
-    <form jwcid="@UserAuthPanel" username="ognl:username" password="ognl:password" listener="ognl:listeners.login">
+    <form jwcid="@UserAuthPanel" username="ognl:username" password="ognl:password" listener="ognl:listeners.login" delegate="ognl:beans.delegate" validate="false">
         <span class="label">Username:</span>
         <input type="text"/><br/>
         <span class="label">Password:</span>

@@ -8,5 +8,35 @@
     
    <property-specification name="bookmark" type="net.negativetwenty.bookmarker.models.Bookmark" persistent="yes"/>
    <property-specification name="category" type="net.negativetwenty.bookmarker.models.Category"/>
-    
+
+   <bean name="delegate" class="net.negativetwenty.bookmarker.valid.BookmarkerDelegate"/>
+   
+   <bean name="required" class="org.apache.tapestry.valid.StringValidator" lifecycle="page">
+       <set-property name="required" expression="true"/>
+   </bean>
+   
+   <bean name="urlValidator" class="net.negativetwenty.bookmarker.valid.UrlValidator" lifecycle="page">
+       <set-property name="required" expression="true"/>
+   </bean>
+   
+   <!--
+   <component id="category" type="ValidField">
+       <message-binding name="displayName" key="category"/>
+       <binding name="validator" expression="beans.urlValidator"/>
+       <binding name="value" expression="category"/>
+   </component>
+   -->
+   
+   <component id="title" type="ValidField">
+       <message-binding name="displayName" key="title"/>
+       <binding name="validator" expression="beans.required"/>
+       <binding name="value" expression="bookmark.title"/>
+   </component>   
+   
+   <component id="url" type="ValidField">
+       <message-binding name="displayName" key="url"/>
+       <binding name="validator" expression="beans.urlValidator"/>
+       <binding name="value" expression="bookmark.url"/>
+   </component>
+   
 </page-specification>

@@ -20,6 +20,8 @@
 package net.negativetwenty.bookmarker.components;
 
 import org.apache.tapestry.*;
+import org.apache.tapestry.form.IFormComponent;
+import org.apache.tapestry.valid.*;
 
 /**
  * Main logic for the UserAuthPanel component, which represents a form for user authentication.
@@ -29,6 +31,7 @@ import org.apache.tapestry.*;
 public abstract class UserAuthPanel extends BaseComponent
 {
     public abstract IActionListener getListener();
+    public abstract IValidationDelegate getDelegate();
     public abstract String getUsername();
     public abstract String getPassword();
     public abstract boolean getVerifypw();
@@ -42,6 +45,13 @@ public abstract class UserAuthPanel extends BaseComponent
      */
     public void submit(final IRequestCycle cycle)
     {
+        final IValidationDelegate delegate = getDelegate();
+        
+        if (true == delegate.getHasErrors())
+        {
+            return;
+        }
+        
         final boolean verifypw = getVerifypw();
         
         // If we need to verify passwords . . .
@@ -53,8 +63,12 @@ public abstract class UserAuthPanel extends BaseComponent
             // check that the "password" and "verify password" fields match . . .
             if (password.equals(verifyPassword) == false)
             {
+                IFormComponent verifyPasswordField = (IFormComponent) getComponent("verifyPassword");
+                delegate.setFormComponent(verifyPasswordField);
+                delegate.record("The passwords do not match up.  Please try again.", ValidationConstraint.CONSISTENCY);
+                
                 // if they don't, set an error message and redisplay the same page.
-                setErrorMessage("The passwords do not match up.  Please try again.");
+                //setErrorMessage("The passwords do not match up.  Please try again.");
                 return;
             }
         }

@@ -2,15 +2,16 @@
 	<h1><span jwcid="@InsertText" value="ognl:errorMessage"/></h1>
 </div>
 
-<form jwcid="@Form" listener="ognl:listeners.submit">
-    <span key="username" class="label">Username:</span>
-    <input type="text" jwcid="@TextField" value="ognl:username"/><br/>
-    <span key="password" class="label">Password:</span>
-    <input type="password" jwcid="@TextField" hidden="true" value="ognl:password"/><br/>
+<form jwcid="@Form" listener="ognl:listeners.submit" delegate="ognl:delegate">
+    <span jwcid="@FieldLabel" class="label" field="ognl:components.username">Username:</span>
+    <input type="text" jwcid="username"/><br/>
+    
+    <span jwcid="@FieldLabel" class="label" field="ognl:components.password">Password:</span>
+    <input type="password" jwcid="password"/><br/>
     
     <span jwcid="@Conditional" condition="ognl:verifypw">
-       <span key="verifyPassword" class="label">Verify Password:</span>
-       <input type="password" jwcid="@TextField" hidden="true" value="ognl:verifyPassword"/><br/> 
+       <span jwcid="@FieldLabel" class="label" field="ognl:components.verifyPassword">Verify Password:</span>
+       <input type="password" jwcid="verifyPassword"/><br/> 
     </span>
     
     <input type="submit" jwcid="@Submit"/>

@@ -11,11 +11,37 @@
     <description>A user authentication panel.</description>
     
     <parameter name="verifypw" type="boolean" direction="in"/>
+    <parameter name="validate" type="boolean" direction="in" default-value="true"/>
     <parameter name="username" type="java.lang.String" direction="auto" required="yes"/>
     <parameter name="password" type="java.lang.String" direction="auto" required="yes"/>
     <parameter name="listener" type="org.apache.tapestry.IActionListener" direction="in" required="yes"/>
-    
+    <parameter name="delegate" type="org.apache.tapestry.valid.IValidationDelegate" direction="auto" required="yes"/>
+     
     <property-specification name="errorMessage" type="java.lang.String"/>
     <property-specification name="verifyPassword" type="java.lang.String"/>
+   
+    <bean name="required" class="org.apache.tapestry.valid.StringValidator" lifecycle="page">
+        <set-property name="required" expression="validate"/>
+    </bean>
+    
+    <component id="username" type="ValidField">
+        <message-binding name="displayName" key="username"/>
+        <binding name="validator" expression="beans.required"/>
+        <binding name="value" expression="username"/>
+    </component>
+    
+    <component id="password" type="ValidField">
+        <message-binding name="displayName" key="password"/>
+        <binding name="validator" expression="beans.required"/>
+        <binding name="value" expression="password"/>
+        <binding name="hidden" expression="true"/>
+    </component>
+    
+    <component id="verifyPassword" type="ValidField">
+        <message-binding name="displayName" key="verifyPassword"/>
+        <binding name="validator" expression="beans.required"/>
+        <binding name="value" expression="verifyPassword"/>
+        <binding name="hidden" expression="true"/>
+    </component>
     
 </component-specification>

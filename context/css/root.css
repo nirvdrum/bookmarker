@@ -139,6 +139,28 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="file"]:focus
 	margin-left: 20%;
 }
 
+/* Figure out how to inherit from ".label". */
+.label-error
+{
+	color: rgb(255, 0, 0);
+	display: block;
+	float: left;
+	text-align: right;
+	width: 100px;
+	padding-right: 20px;
+	margin-left: 20%;
+}
+
+.blah
+{
+	display: block;
+}
+
+.required-marker
+{
+	color: rgb(255, 0, 0);
+}
+
 br
 {
 	clear: left;

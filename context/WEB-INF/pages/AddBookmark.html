@@ -2,16 +2,20 @@
 <body jwcid="$content$">
 <span jwcid="border@Border">
     
-    <form jwcid="@Form" listener="ognl:listeners.addBookmark">
+    <form jwcid="@Form" listener="ognl:listeners.addBookmark" delegate="ognl:beans.delegate">
         <span key="category" class="label">Category:</span>
         <select jwcid="category@PropertySelection" value="ognl:category" model="ognl:categoryModel"/><br/>
-        <span key="title" class="label">Title:</span>
-        <input type="text" jwcid="title@TextField" value="ognl:bookmark.title"/><br/>
-        <span key="url" class="label">URL:</span>
-        <input type="text" jwcid="url@TextField" value="ognl:bookmark.url"/><br/>
+        
+        <span jwcid="@FieldLabel" class="label" field="ognl:components.title">Title:</span>
+        <input type="text" jwcid="title"/><br/>
+        
+        <span jwcid="@FieldLabel" class="label" field="ognl:components.url">URL:</span>
+        <input type="text" jwcid="url"/><br/>
+        
         <span key="description" class="label">Description:</span>
         <textarea rows="10" jwcid="description@TextArea" value="ognl:bookmark.description"></textarea><br/>
-    <p><input type="submit" value="Add" jwcid="@Submit"/></p>   
+        
+        <p><input type="submit" value="Add" jwcid="@Submit"/></p>   
     </form>
     
 	<p/>
