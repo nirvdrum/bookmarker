@@ -82,7 +82,8 @@ public class ApplicationPage extends BasePage implements PageRenderListener, ITr
 	    {
 	        // Get the full list of categories.
 	        final SelectQuery query = new SelectQuery(Category.class);
-	        query.addPrefetch("bookmarks");		
+	        query.addPrefetch("bookmarks");
+	        query.addOrdering(Category.NAME_PROPERTY, true);
 	        final List categories = getDataContext().performQuery(query); 
 		
 	        // Iterate over the category list.
@@ -107,6 +108,7 @@ public class ApplicationPage extends BasePage implements PageRenderListener, ITr
 	        // Immediately under the root, we want to show all bookmarks with no associated category.
 	        final Expression exp = ExpressionFactory.matchExp("category", null);
 	        final SelectQuery query = new SelectQuery(Bookmark.class, exp);
+	        query.addOrdering("title", true);
 	        
 	        // Fetch the list of all such bookmarks and update the visit object appropriately.
 	        final List bookmarks = getDataContext().performQuery(query);

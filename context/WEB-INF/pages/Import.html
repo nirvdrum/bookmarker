@@ -8,7 +8,7 @@
     <form jwcid="import@Form" listener="ognl:listeners.importBookmarks">
     		<h2>Imported Entries:</h2>
     
-        <table border="1">
+        <table border="1" width="75%">
             <tr jwcid="bookmarks@Foreach" source="ognl:bookmarks" value="ognl:bookmark" element="tr">
                 <td><input type="checkbox" jwcid="@Checkbox" selected="ognl:bookmark.importEntry"/></td>
                 <td><select jwcid="category@PropertySelection" value="ognl:bookmark.category" model="ognl:categoryModel"/></td>

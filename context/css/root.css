@@ -79,7 +79,7 @@ div#footer
 {
 	position: fixed;
 	bottom: 0;
-	height: 10%;
+	left: 0;
 	width: 100%;
 }
 

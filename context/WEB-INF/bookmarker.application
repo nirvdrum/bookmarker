@@ -20,9 +20,9 @@
     <library id="contrib" specification-path="/org/apache/tapestry/contrib/Contrib.library"/>
 	<library id="exception" specification-path="/contrib/tapestry/exception/Exception.library"/>
     
-    <service name="bookmarker.export" class="net.negativetwenty.bookmarker.services.ExportService"/>
+    <service class="net.negativetwenty.bookmarker.services.ExportService" name="bookmarker.export"/>
 
-    <page name="ViewBookmark" specification-path="pages/ViewBookmark.page"/>	<page name="AddBookmark" specification-path="/WEB-INF/pages/AddBookmark.page"/>
+    <page name="ViewBookmark" specification-path="/WEB-INF/pages/ViewBookmark.page"/>	<page name="AddBookmark" specification-path="/WEB-INF/pages/AddBookmark.page"/>
 <page name="AddCategory" specification-path="/WEB-INF/pages/AddCategory.page"/>
 <page name="ChangeAuth" specification-path="/WEB-INF/pages/ChangeAuth.page"/>
 <page name="Home" specification-path="/WEB-INF/pages/Home.page"/>
