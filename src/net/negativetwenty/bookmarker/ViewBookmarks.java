@@ -65,6 +65,11 @@ public class ViewBookmarks extends ApplicationPage
         
         // Remove the Bookmark from the database.
         v.removeBookmark(b);
+        
+        // TODO This seems pretty bad.  The RDF file creation should probably move into a new service or something.
+        // Update the RDF file.
+        final AddBookmark ab = (AddBookmark) cycle.getPage("AddBookmark");
+        ab.createRdf(cycle);
     }
     
     /**

@@ -29,21 +29,6 @@ A:active
 	text-decoration: none;
 }
 
-
-tr.boxHeader
-{
-	background-color: rgb(75,75,75);
-	color: rgb(0,0,0);
-	font-weight: bold;
-}
-
-tr.boxContent
-{
-    color: gray;
-    background-color: rgb(50, 50, 50);
-    border: 1px solid rgb(38, 112, 255);
-}
-
 div#mainContent
 {
 	position: absolute;
@@ -95,6 +80,21 @@ div#footer
 	position: fixed;
 	bottom: 0;
 	height: 10%;
+	width: 100%;
+}
+
+div#footer > div.boxHeader
+{
+	background-color: rgb(75,75,75);
+	color: rgb(0,0,0);
+	font-weight: bold;
+	margin-bottom: 2px;
+}
+
+div#footer > div.boxContent
+{
+    color: gray;
+    background-color: rgb(50, 50, 50);
 }
 
 h1
