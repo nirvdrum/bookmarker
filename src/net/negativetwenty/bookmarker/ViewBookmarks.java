@@ -30,4 +30,10 @@ public abstract class ViewBookmarks extends ApplicationPage
 
         throw new RedirectException(b.getUrl());
     }
+    
+    public void pageBeginRender(PageEvent event) 
+    {
+        Visit v = (Visit) getVisit();
+        getComponent("border").setProperty("heading", v.getCategory().getName());
+    }
 }

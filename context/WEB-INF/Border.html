@@ -3,7 +3,9 @@
 
     <!-- Start Header -->
     <div id="header">
-    		<a href="#" jwcid="@PageLink" page="Home"><span key="header">Header.</span></a>
+    		<a href="#" jwcid="headerLink@PageLink" page="Home"><span key="header">Header.</span></a>
+            
+         <h1><span jwcid="heading@InsertText" value="ognl:heading"/></h1>
     </div>
     <!-- End Header -->
         
@@ -14,7 +16,13 @@
                 <span jwcid="treeNodeView"/>
 			</span>
 		</span>	
-	</div>
+    	
+        <br/>
+        
+        <span jwcid="isLoggedIn@Conditional" condition="ognl:!page.visit.loggedIn">
+            <a href="#" jwcid="login@PageLink" page="Login">Login</a>
+        </span>
+    </div>
     <!-- End Menu Bar -->
             
     <!-- Start Main Content -->
@@ -26,11 +34,10 @@
     <!-- End Main Content -->
 
 	<!-- Start Footer -->
-    <p>
     <div id="footer">
     <table width="100%">
-   		<tr>
-      		<td class="boxHeader"><center><span key="footer" raw="true">Copyright <a href="http://www.negativetwenty.net/">NegativeTwenty</a>, 2004.</span></center></td>
+   		<tr class="boxHeader">
+      		<td><center><span key="footer" raw="true">Copyright <a href="http://www.negativetwenty.net/">NegativeTwenty</a>, 2004.</span></center></td>
    		</tr>
    		<tr class="boxContent">
   	  		<td>
@@ -42,7 +49,6 @@
     		</tr>
 	</table>
     </div>
-    </p>
     <!-- End Footer -->
 
 </body>

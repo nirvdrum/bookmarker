@@ -3,21 +3,13 @@
 <span jwcid="@Border">
     
     <form jwcid="@Form" listener="ognl:listeners.addCategory">
-    <table border='1'>
-        <tr>
-            <th><span key="parent">Parent:</span></th>
-            <td><select jwcid="parent@PropertySelection" value="ognl:parent" model="ognl:categoryModel"/></td>
-        </tr>
-        <tr>
-            <th><span key="name">Name:</span></th>
-            <td><input type="text" jwcid="name@TextField" value="ognl:category.name" size="20"/></td>
-        </tr>
-        <tr>
-            <th><span key="description">Description:</span></th>
-            <td><textarea jwcid="description@TextArea" value="ognl:category.description"></textarea></td>
-        </tr>
-    </table>
-    <p><input type="submit" value="Add" key="addButton"/></p>
+        <span key="parent" class="label">Parent:</span>
+        <select jwcid="parent@PropertySelection" value="ognl:parent" model="ognl:categoryModel"/><br/>
+        <span key="name" class="label">Name:</span>
+        <input type="text" jwcid="name@TextField" value="ognl:category.name" size="20"/><br/>
+        <span key="description" class="label">Description:</span>
+        <textarea jwcid="description@TextArea" value="ognl:category.description"></textarea><br/>
+    <p><input type="submit" value="Add" jwcid="@Submit"/></p>
     </form>
     
 </span>

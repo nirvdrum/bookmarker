@@ -3,25 +3,18 @@
   <LINK REL="StyleSheet" HREF="../../css/root.css" TYPE="text/css">
 </head>
 <body jwcid="$content$">
-<span jwcid="@Border">
-    
-    <span jwcid="bookmarks@Foreach" source="ognl:visit.bookmarks" value="ognl:bookmark">
-   	 	<table class="box">
-        	<tr class="boxHeader">
-            	<th><span key="title">Title:</span></th>
-            	<td><a href="#" jwcid="title@DirectLink" listener="ognl:listeners.linkClicked" parameters="ognl:bookmark.objectId"><span jwcid="@InsertText" value="ognl:bookmark.title"/></a></td>
-        	</tr>
-        	<tr class="boxContent">
-            	<th><span key="description">Description:</span></th>
-            	<td><span jwcid="description@InsertText" value="ognl:bookmark.description"/></td>
-        	</tr>
-         <tr class="boxContent">
-             <th><span key="clickCount">Click Count:</span></th>
-             <td><span jwcid="clickCount@Insert" value="ognl:bookmark.clickCount"/></td>
-         </tr>
-    		</table>
-    		<br/><br/>
-    </span>	
+<span jwcid="border@Border">
+
+    <div jwcid="bookmarks@Foreach" source="ognl:visit.bookmarks" value="ognl:bookmark" element="div" class="box">
+         <h4>
+             <a href="#" jwcid="bookmarkLink@DirectLink" listener="ognl:listeners.linkClicked" parameters="ognl:bookmark.objectId"><span jwcid="bookmarkLinkText@InsertText" value="ognl:bookmark.title"/></a>
+             <span jwcid="isAdmin@Conditional" condition="ognl:visit.loggedIn">
+                 [<i><a href="#">Modify</a></i> | <i><a href="#">Remove</a></i>]
+             </span>
+         </h4>
+         <span jwcid="description@InsertText" value="ognl:bookmark.description"/>
+         <br/><small><i><span key="clickCount">Click Count:</span><span jwcid="clickCount@Insert" value="ognl:bookmark.clickCount"/></i></small>
+    </div>	
 </span>
 </body>
 </html>

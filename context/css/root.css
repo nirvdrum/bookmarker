@@ -5,15 +5,9 @@ BODY
 	font-family: verdana, serif;
 }
 
-A:link
+A:link, A:visited
 {
-    color: rgb(0, 200, 200);
-    text-decoration: none;
-}
-
-A:visited
-{
-    color: rgb(0, 200, 200);
+    color: rgb(0, 190, 255);
     text-decoration: none;
 }
 
@@ -35,32 +29,22 @@ A:active
 	text-decoration: none;
 }
 
-th
-{
-	width: 25%;
-}
 
-.box
-{
-	width: 70%;
-	border: 1px solid rgb(38, 112, 255);
-}
-
-.boxHeader
+tr.boxHeader
 {
 	background-color: rgb(75,75,75);
 	color: rgb(0,0,0);
 	font-weight: bold;
 }
 
-.boxContent
+tr.boxContent
 {
     color: gray;
     background-color: rgb(50, 50, 50);
     border: 1px solid rgb(38, 112, 255);
 }
 
-#mainContent
+div#mainContent
 {
 	position: absolute;
 	left: 20%;
@@ -76,6 +60,17 @@ div#header
 	position: fixed;
 	top: 0;
 	width: 100%;
+}
+
+div#header h1
+{
+	position: absolute;
+	width:75%;
+	left: 20%;
+	right: 5%;
+	top: 0%;
+	text-align: center;
+	margin: 15px;
 }
 
 div#menuBar
@@ -128,4 +123,22 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus
 br
 {
 	clear: left;
-} 
+}
+
+div.box
+{
+	width: 70%;
+	margin: 25px;
+	padding: 3px;
+	text-align: left;
+	border: 1px solid rgb(38, 112, 255);
+}
+
+div.box h4
+{
+	margin: 0px;
+	padding: 5px;
+	text-align: center;
+	background-color: rgb(45,45,45);
+	color: rgb(0,0,0);
+}

@@ -9,6 +9,10 @@
     <context-asset name="stylesheet" path="css/root.css"/>
     <context-asset name="rdffile" path="bookmarks.rdf"/>
 
+    <property-specification name="username" type="java.lang.String"/>
+    <property-specification name="password" type="java.lang.String"/>
+    <property-specification name="heading" type="java.lang.String" />
+    
     <bean name="metaGenerator" class="net.negativetwenty.bookmarker.MetaGenerator"/>
     
     <component id="treeData" type="contrib:TreeDataView">
