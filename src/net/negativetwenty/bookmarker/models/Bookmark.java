@@ -19,7 +19,7 @@ package net.negativetwenty.bookmarker.models;
 import net.negativetwenty.bookmarker.models.auto._Bookmark;
 
 /**
- * Represents a Bookmark. 
+ * Represents a bookmark. 
  *
  * @author nirvdrum
  */
