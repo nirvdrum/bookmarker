@@ -41,7 +41,7 @@ public class Main
 
         try
         {
-            servletServer.addListener(new InetAddrPort("127.0.0.1", 8080));
+            servletServer.addListener(new InetAddrPort(8080));
             servletServer.addListener(new AJP13Listener(new InetAddrPort("127.0.0.1", 8009)));
             servletServer.addWebApplication("/", "bookmarker");
             servletServer.start();
