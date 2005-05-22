@@ -103,6 +103,8 @@
 			<fileset dir="${lib-standalone.dir}"/>
 		</copy>
 		
+		<copy file="server.xml" todir="${standalone.dir}"/>
+		
 		<unjar dest="${standalone.dir}/bookmarker/" src="${build.dir}/bookmarker.war"/>
 		
 		<copy todir="${standalone.dir}/images">

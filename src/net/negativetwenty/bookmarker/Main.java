@@ -36,19 +36,13 @@ import org.mortbay.util.*;
 public class Main
 {
     public static void main(String[] args)
-    {   
-        final Server servletServer = new Server();
-
+    {                  
         try
         {
-            servletServer.addListener(new InetAddrPort(8080));
-            servletServer.addListener(new AJP13Listener(new InetAddrPort("127.0.0.1", 8009)));
-            servletServer.addWebApplication("/", "bookmarker");
+            final Server servletServer = new Server("server.xml");
             servletServer.start();
-            
-            final SysTray st = new SysTray(servletServer);
         }
-        catch (Exception e)
+        catch (final Exception e)
         {
             e.printStackTrace();
         }

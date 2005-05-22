@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE Configure PUBLIC 
+ "-//Mort Bay Consulting//DTD Configure 1.2//EN" 
+ "http://jetty.mortbay.org/configure_1_2.dtd">
+
+<Configure class="org.mortbay.jetty.Server">
+  <Call name="addListener">
+    <Arg>
+      <New class="org.mortbay.util.InetAddrPort">
+        <!-- Change this line to change the IP address to bind to. -->
+        <Arg>127.0.0.1</Arg>
+        
+        <!-- Change this line to change the port to listen on. -->
+        <Arg type="int">8080</Arg>
+      </New>
+    </Arg>
+  </Call>
+
+  <!-- Uncomment this to add an AJP listener for mod_jk.
+  <Call name="addListener">
+    <Arg>
+      <New class="org.mortbay.http.ajp.AJP13Listener">
+      	<Arg>
+      	  <New class="org.mortbay.util.InetAddrPort">
+            <Arg>127.0.0.1</Arg>
+            <Arg type="int">8009</Arg>
+          </New>
+        </Arg>
+      </New>
+    </Arg>
+  </Call>
+  -->
+
+  <Call name="addWebApplication">
+    <Arg>/bookmarker</Arg>
+    <Arg>bookmarker</Arg>
+  </Call>
+</Configure>
