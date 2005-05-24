@@ -18,7 +18,8 @@
     <property name="database-port" value="9001"/>
     
     <library id="contrib" specification-path="/org/apache/tapestry/contrib/Contrib.library"/>
-	<library id="exception" specification-path="/contrib/tapestry/exception/Exception.library"/>
+    <library id="exception" specification-path="/contrib/tapestry/exception/Exception.library"/>
+    <library id="tacos" specification-path="/net/sf/tacos/Tacos.library"/>
     
     <service class="net.negativetwenty.bookmarker.services.ExportService" name="bookmarker.export"/>
 

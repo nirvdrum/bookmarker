@@ -29,7 +29,6 @@ import net.negativetwenty.bookmarker.models.Bookmark;
 import net.negativetwenty.bookmarker.models.User;
 
 import org.apache.tapestry.IRequestCycle;
-import org.apache.tapestry.html.BasePage;
 import org.apache.tapestry.request.IUploadFile;
 import org.objectstyle.cayenne.CayenneException;
 import org.objectstyle.cayenne.util.XMLDecoder;

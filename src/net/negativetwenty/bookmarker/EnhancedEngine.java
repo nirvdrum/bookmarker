@@ -19,8 +19,6 @@
  */
 package net.negativetwenty.bookmarker;
 
-import java.util.*;
-import org.apache.tapestry.*;
 import org.apache.tapestry.engine.*;
 import org.apache.tapestry.request.RequestContext;
 

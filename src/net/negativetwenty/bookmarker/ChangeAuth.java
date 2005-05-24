@@ -21,7 +21,6 @@ package net.negativetwenty.bookmarker;
 
 import org.apache.tapestry.IRequestCycle;
 import org.apache.tapestry.event.PageEvent;
-import org.objectstyle.cayenne.access.DataContext;
 import net.negativetwenty.bookmarker.models.*;
 
 /**

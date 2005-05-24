@@ -19,12 +19,18 @@
  */
 package net.negativetwenty.bookmarker.components;
 
+import java.util.*;
+
 import net.negativetwenty.bookmarker.AddBookmark;
 import net.negativetwenty.bookmarker.Login;
 import net.negativetwenty.bookmarker.Visit;
+import net.negativetwenty.bookmarker.models.Category;
+import net.negativetwenty.bookmarker.models.TreeKeyProvider;
+import net.sf.tacos.model.IKeyProvider;
 
 import org.apache.tapestry.*;
 import org.apache.tapestry.callback.PageCallback;
+import org.objectstyle.cayenne.DataObjectUtils;
 
 /**
  * The Border class provides the logic for the Border component.
@@ -33,6 +39,12 @@ import org.apache.tapestry.callback.PageCallback;
  */
 public class Border extends BaseComponent
 {
+    // TODO No need to constantly create a new object.  Maybe create a global one and cache it.
+    public IKeyProvider getTreeKeyProvider()
+    {
+        return new TreeKeyProvider();
+    }
+    
     /**
      * Login listener.  Records the current page being visited and redirects the user to the Login page.
      * 
@@ -68,5 +80,32 @@ public class Border extends BaseComponent
         final AddBookmark ab = (AddBookmark) cycle.getPage("AddBookmark");
         ab.setBookmark(null);
         cycle.activate(ab);
+    }
+    
+    /**
+     * ViewBookmarks listener.  Shows all the bookmarks for the selected category.  Also expands the category
+     * tree as appropriate.
+     * 
+     * @param cycle
+     */
+    public void viewBookmarks(final IRequestCycle cycle)
+    {
+        // Retrieve the Visit object for several operations.
+        final Visit v = (Visit) getPage().getVisit();
+        
+        // Restore the Category object passed as a parameter in the link.
+        final Integer id = (Integer) cycle.getServiceParameters()[0];
+        final Category c = (Category) DataObjectUtils.objectForPK(v.getDataContext(), Category.class, id.intValue());
+        
+        // Update the clicked category in the Visit object so ViewBookmarks has everything it needs.
+        v.setCategory(c);
+        
+        // TODO The following should only be done if the category has subcategories, otherwise we're wasting space in the set.  For now though, the check requires a costly DB access so it is not performed.
+        // Add the Category object to the tree state so that it expands node (similar to clicking the '+' button in the tree).
+        final Set treeState = v.getTreeState();
+        treeState.add(new Integer(id));
+        
+        // Redirect to the ViewBookmarks page to view the bookmarks in this category.
+        cycle.activate("ViewBookmarks");
     }
 }

@@ -19,13 +19,7 @@
  */
 package net.negativetwenty.bookmarker;
 
-import java.awt.event.*;
-import javax.swing.*;
-import org.jdesktop.jdic.tray.*;
-
-import org.mortbay.jetty.*;
-import org.mortbay.http.ajp.*;
-import org.mortbay.util.*;
+import org.mortbay.jetty.Server;
 
 /**
  * This allows for Bookmarker to be used in standalone mode.  It starts up a local instance of Jetty to

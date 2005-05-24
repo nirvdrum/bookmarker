@@ -60,4 +60,9 @@ public class Bookmark extends _Bookmark
     {
         this.importEntry = importEntry;
     }
+    
+    public String toString()
+    {
+        return getTitle();
+    }
 }

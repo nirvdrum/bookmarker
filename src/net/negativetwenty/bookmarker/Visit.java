@@ -23,12 +23,7 @@ import java.io.*;
 import java.util.*;
 
 import net.negativetwenty.bookmarker.models.*;
-
-import org.apache.tapestry.contrib.tree.model.*;
-import org.apache.tapestry.contrib.tree.simple.SimpleTreeDataModel;
-import org.apache.tapestry.contrib.tree.simple.SimpleTreeModel;
-import org.apache.tapestry.contrib.tree.simple.SimpleTreeStateModel;
-import org.apache.tapestry.contrib.tree.simple.TreeNode;
+import net.sf.tacos.model.ITreeContentProvider;
 
 import org.objectstyle.cayenne.access.DataContext;
 import org.objectstyle.cayenne.conf.Configuration;
@@ -43,7 +38,8 @@ import org.objectstyle.cayenne.query.SelectQuery;
 public class Visit implements Serializable 
 {
     protected final DataContext dataContext;
-	protected ITreeModel treeModel = null;
+    protected final TreeContentProvider treeContentProvider = new TreeContentProvider();
+    protected Set treeState = new HashSet();
 	protected List bookmarks = null;
 	protected Category category = null;
 	protected User user = null;
@@ -78,59 +74,17 @@ public class Visit implements Serializable
 	    return (user != null);
 	}
 	
-	/**
-	 * Invalidates the model used for the category tree view.
-	 */
-	public void invalidateTreeModel()
-	{
-	    treeModel = null;
-	}
-	
-	/**
-	 * Returns an instance of the model used to for the category tree view, creating a new instance if
-	 * necessary.
-	 * 
-	 * @return The model for the category tree view.
-	 */
-	public ITreeModel getTreeModel()
-	{
-	    // If the model is null, create a new one.
-	    if (treeModel == null)
-	    {
-	        // Get all the categories that don't have a parent category.
-	        final Expression exp = ExpressionFactory.matchExp("parent", null);
-	        final SelectQuery query = new SelectQuery(Category.class, exp);
-	        final List categories = getDataContext().performQuery(query); 
-	        
-	        // Build the tree recursively, starting with the categories that have no parent category.
-	        final TreeNode rootNode = new TestTreeNode("Bookmarks");
-	        buildTree(categories, rootNode);
-			
-	        // Build the tree model out of the tree.
-	        final ITreeDataModel treeDataModel = new SimpleTreeDataModel(rootNode);
-	        treeModel = new SimpleTreeModel(treeDataModel, new SimpleTreeStateModel());
-	    }
-
-	    return treeModel;
-	}
-	
-	/**
-	 * Recursively builds a tree into root of all categories and their child categories.
-	 * 
-	 * @param children The list of categories to build recursively on.
-	 * @param root The root node of a sub tree of categories.
-	 */
-	protected void buildTree(final List children, final TreeNode root)
-	{
-	    final Iterator it = children.iterator();
-	    while (it.hasNext())
-	    {
-	        final Category c = (Category) it.next();
-	        final TestTreeNode node = new TestTreeNode(c.getName());
-	        buildTree(c.getChildren(), node);
-	        root.insert(node);
-	    }
-	}
+    public ITreeContentProvider getTreeContentProvider()
+    {
+        // Get all the categories that don't have a parent category.
+        final Expression exp = ExpressionFactory.matchExp("parent", null);
+        final SelectQuery query = new SelectQuery(Category.class, exp);
+        final List categories = getDataContext().performQuery(query); 
+        
+        treeContentProvider.setCategories(categories);
+        
+        return treeContentProvider;
+    }
 	
     /**
      * Returns the active list of bookmarks.
@@ -170,6 +124,8 @@ public class Visit implements Serializable
     public void setCategory(final Category category)
     {
         this.category = category;
+        
+        bookmarks = category.getBookmarks();
     }
     
     /**
@@ -202,5 +158,15 @@ public class Visit implements Serializable
     public void setUser(final User user)
     {
         this.user = user;
+    }
+    
+    public Set getTreeState()
+    {
+        return treeState;
+    }
+    
+    public void setTreeState(final Set treeState)
+    {
+        this.treeState = treeState;
     }
 }

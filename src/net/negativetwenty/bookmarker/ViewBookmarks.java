@@ -24,7 +24,6 @@ import net.negativetwenty.bookmarker.models.*;
 import org.apache.tapestry.*;
 import org.apache.tapestry.event.*;
 import org.objectstyle.cayenne.*;
-import org.objectstyle.cayenne.access.*;
 
 
 /**
@@ -99,7 +98,7 @@ public class ViewBookmarks extends ApplicationPage
         final Visit v = (Visit) getVisit();
         final Category c = v.getCategory();
         
-        if (c != null)
+        if (null != c)
         {
             getComponent("border").setProperty("heading", c.getName());
         }

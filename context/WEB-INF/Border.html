@@ -15,11 +15,12 @@
         
     <!-- Start Menu Bar -->
     <div id="menuBar">
+        
         <span jwcid="treeView">
-            <span jwcid="treeData">
-                <span jwcid="treeNodeView"/>
-			</span>
-		</span>	
+            <a href="#" jwcid="@DirectLink" listener="ognl:listeners.viewBookmarks" parameters="ognl:@org.objectstyle.cayenne.DataObjectUtils@intPKForObject(treeValue)">
+                <span jwcid="@InsertText" value="ognl:treeValue.name"/>
+            </a>
+        </span>
     	
         <br/>
         

@@ -64,7 +64,6 @@ public abstract class AddCategory extends SecureApplicationPage implements PageR
 		    return;
 		}
 	    
-	    final Visit v = (Visit) getVisit();
 	    final DataContext dc = getDataContext();
 	    final Category category = getCategory();
 		
@@ -78,9 +77,6 @@ public abstract class AddCategory extends SecureApplicationPage implements PageR
 		
 	    // Add the category to the db.
 	    dc.commitChanges();
-		
-		// Invalidate the tree model so the new category will be added to the tree.
-		v.invalidateTreeModel();
 		
 		// TODO Change this to be some sort of callback.
 		cycle.activate("Home");

@@ -9,26 +9,16 @@
     <context-asset name="stylesheet" path="css/root.css"/>
     <context-asset name="rdffile" path="/bookmarks.rdf"/>
     
-    <property-specification name="heading" type="java.lang.String" />
+    <property-specification name="heading" type="java.lang.String"/>
+    <property-specification name="treeValue" type="net.negativetwenty.bookmarker.models.Category"/>
     
     <bean name="metaGenerator" class="net.negativetwenty.bookmarker.MetaGenerator"/>
     
-    <component id="treeData" type="contrib:TreeDataView">
-        <binding name="treeView" expression='components.treeView'/>
-        <binding name="value" expression='value'/>
-    </component>
-
-    <component id="treeNodeView" type="contrib:TreeNodeView">
-        <binding name="makeNodeDirect" expression="true"/>
-        <!--binding name="nodeRenderFactory" expression='renderFactory'/-->
-        <!--binding name="showNodeImages" expression="false"/-->
-        <!--binding name="treeDataView" expression='components.treeData'/-->
-    </component>
-    
-    <component id="treeView" type="contrib:TreeView">
-        <!--binding name="sessionStateManager" expression='sessionStateManager'/-->
-        <binding name="treeModel" expression='page.visit.treeModel'/>
-        <binding name="treeStateListener" expression='page'/>
+    <component id="treeView" type="tacos:Tree">
+        <binding name="contentProvider" expression='page.visit.treeContentProvider'/>
+        <binding name="value" expression='treeValue'/>
+        <binding name="keyProvider" expression="treeKeyProvider"/>
+        <binding name="state" expression="page.visit.treeState"/>
     </component>
     
 </component-specification>

@@ -19,19 +19,12 @@
  */
 package net.negativetwenty.bookmarker;
 
-import java.util.*;
-
 import net.negativetwenty.bookmarker.models.*;
-import net.negativetwenty.bookmarker.models.Category;
 
-import org.apache.tapestry.*;
 import org.apache.tapestry.contrib.tree.model.*;
 import org.apache.tapestry.event.*;
 import org.apache.tapestry.html.BasePage;
 import org.objectstyle.cayenne.access.DataContext;
-import org.objectstyle.cayenne.exp.Expression;
-import org.objectstyle.cayenne.exp.ExpressionFactory;
-import org.objectstyle.cayenne.query.SelectQuery;
 
 /**
  * A superclass of all application pages. Contains utility methods
@@ -40,7 +33,7 @@ import org.objectstyle.cayenne.query.SelectQuery;
  * @author Andrei Adamchik
  * @author nirvdrum
  */
-public class ApplicationPage extends BasePage implements PageRenderListener, ITreeStateListener
+public class ApplicationPage extends BasePage implements PageRenderListener
 {
     protected ITreeModel treeModel = null; 
         
@@ -69,62 +62,4 @@ public class ApplicationPage extends BasePage implements PageRenderListener, ITr
      * allowing subclasses to perform proper initialization.
      */
     public void pageBeginRender(PageEvent event) {}
-	
-	public void treeStateChanged(TreeStateEvent tse)
-	{
-	    // Get the selected tree node and grab a copy of the root node.
-	    final Visit v = (Visit) getVisit();
-	    final TestTreeNode node = (TestTreeNode) v.getTreeModel().getTreeDataModel().getObject(tse.getTreeStateModel().getSelectedNode());
-	    final TestTreeNode rootNode = (TestTreeNode) v.getTreeModel().getTreeDataModel().getRoot();
-	    
-	    // If the node isn't the root, then the user has selected a category.
-	    if (node.equals(rootNode) == false)
-	    {
-	        // Get the full list of categories.
-	        final SelectQuery query = new SelectQuery(Category.class);
-	        query.addPrefetch("bookmarks");
-	        query.addOrdering(Category.NAME_PROPERTY, true);
-	        final List categories = getDataContext().performQuery(query); 
-		
-	        // Iterate over the category list.
-	        final Iterator it = categories.iterator();
-	        while (it.hasNext())
-	        {
-	            final Category c = (Category) it.next();
-		    
-	            // If the current category matches the selected node . . .
-	            if (c.getName().equals(node.getValue()))
-	            {
-	                // update the visitor with the list of bookmarks and the selected category.
-	                v.setBookmarks(c.getBookmarks());
-	                v.setCategory(c);
-	            }
-	        }
-	    }
-	    
-	    // Otherwise, the user has selected the root node.
-	    else
-	    {
-	        // Immediately under the root, we want to show all bookmarks with no associated category.
-	        final Expression exp = ExpressionFactory.matchExp("category", null);
-	        final SelectQuery query = new SelectQuery(Bookmark.class, exp);
-	        query.addOrdering("title", true);
-	        
-	        // Fetch the list of all such bookmarks and update the visit object appropriately.
-	        final List bookmarks = getDataContext().performQuery(query);
-            v.setBookmarks(bookmarks);
-            final Category c = new Category();
-            
-            // If there any bookmarks with no associated category, we want to show something under the 
-            // category heading for these bookmarks.
-	        if (bookmarks.isEmpty() == false)
-	        {
-	            c.setName("__DEFAULT__");
-	        }
-            v.setCategory(c);
-	    }
-	    
-        // Redirect to the page used for viewing bookmarks.
-        throw new PageRedirectException("ViewBookmarks");
-	}
 }

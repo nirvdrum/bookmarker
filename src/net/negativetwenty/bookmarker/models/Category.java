@@ -23,8 +23,12 @@ import net.negativetwenty.bookmarker.models.auto._Category;
  *
  * @author nirvdrum
  */
-public class Category extends _Category {
-
+public class Category extends _Category
+{
+    public String toString()
+    {
+        return getName();
+    }
 }
 
 
