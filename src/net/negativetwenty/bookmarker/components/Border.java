@@ -25,8 +25,6 @@ import net.negativetwenty.bookmarker.AddBookmark;
 import net.negativetwenty.bookmarker.Login;
 import net.negativetwenty.bookmarker.Visit;
 import net.negativetwenty.bookmarker.models.Category;
-import net.negativetwenty.bookmarker.models.TreeKeyProvider;
-import net.sf.tacos.model.IKeyProvider;
 
 import org.apache.tapestry.*;
 import org.apache.tapestry.callback.PageCallback;
@@ -38,13 +36,7 @@ import org.objectstyle.cayenne.DataObjectUtils;
  * @author nirvdrum
  */
 public class Border extends BaseComponent
-{
-    // TODO No need to constantly create a new object.  Maybe create a global one and cache it.
-    public IKeyProvider getTreeKeyProvider()
-    {
-        return new TreeKeyProvider();
-    }
-    
+{    
     /**
      * Login listener.  Records the current page being visited and redirects the user to the Login page.
      * 

@@ -23,11 +23,13 @@ import java.io.*;
 import java.util.*;
 
 import net.negativetwenty.bookmarker.models.*;
+import net.negativetwenty.bookmarker.trees.TreeContentProvider;
 import net.sf.tacos.model.ITreeContentProvider;
 
 import org.objectstyle.cayenne.access.DataContext;
 import org.objectstyle.cayenne.conf.Configuration;
 import org.objectstyle.cayenne.exp.*;
+import org.objectstyle.cayenne.query.Ordering;
 import org.objectstyle.cayenne.query.SelectQuery;
 
 /**
@@ -79,6 +81,7 @@ public class Visit implements Serializable
         // Get all the categories that don't have a parent category.
         final Expression exp = ExpressionFactory.matchExp("parent", null);
         final SelectQuery query = new SelectQuery(Category.class, exp);
+        query.addOrdering("name", true);
         final List categories = getDataContext().performQuery(query); 
         
         treeContentProvider.setCategories(categories);
@@ -125,7 +128,9 @@ public class Visit implements Serializable
     {
         this.category = category;
         
+        final Ordering o = new Ordering("title", true);
         bookmarks = category.getBookmarks();
+        o.orderList(bookmarks);
     }
     
     /**

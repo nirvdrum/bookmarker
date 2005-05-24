@@ -6,9 +6,9 @@
     		<a href="#" jwcid="headerLink@PageLink" page="Home"><span key="header">Header.</span></a>
             
          <div id="heading"><h1><span jwcid="heading@InsertText" value="ognl:heading"/></h1>
-         <span jwcid="showAddBookmarkLink@Conditional" condition="ognl:heading">
+         <div jwcid="showAddBookmarkLink@Conditional" condition="ognl:heading">
              <a href="#" jwcid="addBookmark@DirectLink" listener="ognl:listeners.addBookmark"><span key="addBookmark">Add Bookmark</span></a>
-         </span>
+         </div>
          </div>
     </div>
     <!-- End Header -->
@@ -53,17 +53,13 @@
     <!-- End Main Content -->
 
 	<!-- Start Footer -->
+    <!--
     <div id="footer">
    		<div class="boxHeader">
-      		<center>Version 0.2.1 -- <span key="footer" raw="true">Copyright <a href="http://www.negativetwenty.net/projects/bookmarker/">NegativeTwenty</a>, 2004-2005.</span></center>
+      		<center>Version 0.2.2 - <span key="footer" raw="true">Copyright <a href="http://www.negativetwenty.net/projects/bookmarker/">NegativeTwenty</a>, 2004-2005.</span></center>
    		</div>
-   		<div class="boxContent">
-   	      		<center>
-            			<a href="http://validator.w3.org/check/referer"><img border="0" src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!" height="31" width="88"></a>
-               		<a href="http://jigsaw.w3.org/css-validator/"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!"></a>
-          		</center>
-    		</div>
     </div>
+    -->
     <!-- End Footer -->
 
 </body>

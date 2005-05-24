@@ -4,11 +4,15 @@
  * TODO Insert license or copyright statement.
  */
 
-package net.negativetwenty.bookmarker.models;
+package net.negativetwenty.bookmarker.trees;
 
 
 import java.util.*;
 
+import org.objectstyle.cayenne.query.Ordering;
+
+import net.negativetwenty.bookmarker.models.Bookmark;
+import net.negativetwenty.bookmarker.models.Category;
 import net.sf.tacos.model.ITreeContentProvider;
 
 public class TreeContentProvider implements ITreeContentProvider
@@ -21,7 +25,11 @@ public class TreeContentProvider implements ITreeContentProvider
         {
             final Category c = (Category) parent;
             
-            return c.getChildren();
+            final Ordering o = new Ordering("name", true);
+            final List ret = c.getChildren();
+            o.orderList(ret);
+            
+            return ret;
         }
         
         return Collections.EMPTY_LIST;
@@ -29,8 +37,6 @@ public class TreeContentProvider implements ITreeContentProvider
 
     public boolean hasChildren(final Object parent)
     {
-        Collection children = getChildren(parent);
-        System.err.println("Children size: " + children.size());
         if (getChildren(parent).size() > 0)
         {
             return true;

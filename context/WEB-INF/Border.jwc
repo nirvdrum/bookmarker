@@ -13,11 +13,12 @@
     <property-specification name="treeValue" type="net.negativetwenty.bookmarker.models.Category"/>
     
     <bean name="metaGenerator" class="net.negativetwenty.bookmarker.MetaGenerator"/>
+    <bean name="treeKeyProvider" class="net.negativetwenty.bookmarker.trees.TreeKeyProvider" lifecycle="page"/>
     
     <component id="treeView" type="tacos:Tree">
         <binding name="contentProvider" expression='page.visit.treeContentProvider'/>
         <binding name="value" expression='treeValue'/>
-        <binding name="keyProvider" expression="treeKeyProvider"/>
+        <binding name="keyProvider" expression="beans.treeKeyProvider"/>
         <binding name="state" expression="page.visit.treeState"/>
     </component>
     

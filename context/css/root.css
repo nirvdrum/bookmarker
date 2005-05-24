@@ -1,4 +1,4 @@
-BODY
+body
 {
 	background: rgb(0,0,0);
 	color: rgb(200,200,200);
@@ -33,20 +33,26 @@ div#mainContent
 {
 	position: absolute;
 	left: 20%;
-	top: 10%;
+	top: 15%;
 	width: 80%;
-	height: 79%; /* 100 - 10 (header) - 10 (footer) - 1 (spacing between content and footer) */
 	margin-left:auto;
 	margin-right:auto;
-	overflow:auto;
 }
 
 div#header
 {
 	position: fixed;
+	background-color: rgb(0, 0, 0);
+	z-index: 2;
 	top: 0;
 	width: 100%;
-	height: 10%;
+	height: 15%;
+}
+
+div#header > div
+{
+	background-color: rgb(0, 0, 0);
+	z-index: 3;
 }
 
 div#heading
@@ -55,10 +61,10 @@ div#heading
 	width:75%;
 	left: 20%;
 	right: 5%;
+	height: 10%;
 	top: 0%;
 	text-align: center;
 	margin: 15px;
-	z-index: 1;
 }
 
 div#heading h1
@@ -71,10 +77,11 @@ div#menuBar
 	position: fixed;
 	left: 0;
 	right: 80%;
-	top: 10%;
+	top: 15%;
 	overflow: auto;
 }
 
+/*
 div#footer
 {
 	position: fixed;
@@ -96,6 +103,7 @@ div#footer > div.boxContent
     color: gray;
     background-color: rgb(50, 50, 50);
 }
+*/
 
 h1
 {
@@ -129,7 +137,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="file"]:focus
 	background-color: rgb(200, 200, 200);
 }
 
-.label
+.label, .label-error
 {
 	display: block;
 	float: left;
@@ -139,16 +147,9 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="file"]:focus
 	margin-left: 20%;
 }
 
-/* Figure out how to inherit from ".label". */
 .label-error
 {
 	color: rgb(255, 0, 0);
-	display: block;
-	float: left;
-	text-align: right;
-	width: 100px;
-	padding-right: 20px;
-	margin-left: 20%;
 }
 
 .blah
