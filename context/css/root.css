@@ -105,6 +105,16 @@ div#footer > div.boxContent
 }
 */
 
+div.tooltip
+{
+	position: absolute;
+	z-index: 100;
+	width: 15em;
+	padding: 2px;
+	background-color: rgb(50, 50, 50);
+	border: 1px solid rgb(75, 75, 75);
+}
+
 h1
 {
 	background-color: rgb(75,75,75);

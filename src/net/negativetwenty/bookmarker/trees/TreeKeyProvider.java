@@ -20,6 +20,6 @@ public class TreeKeyProvider implements IKeyProvider
     {
         Category c = (Category) o;
         
-        return DataObjectUtils.intPKForObject(c);
+        return new Integer(DataObjectUtils.intPKForObject(c));
     }
 }

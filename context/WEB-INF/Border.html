@@ -17,9 +17,11 @@
     <div id="menuBar">
         
         <span jwcid="treeView">
+        <span jwcid="@tooltip:Tooltip" xoffset="50" yoffset="0" staticFlag="false" tooltipContent="ognl:'<div class=\'tooltip\'>' + treeValue.description + '</div>'">
             <a href="#" jwcid="@DirectLink" listener="ognl:listeners.viewBookmarks" parameters="ognl:@org.objectstyle.cayenne.DataObjectUtils@intPKForObject(treeValue)">
                 <span jwcid="@InsertText" value="ognl:treeValue.name"/>
             </a>
+            </span>
         </span>
     	
         <br/>

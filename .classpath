@@ -21,5 +21,6 @@
 	<classpathentry kind="lib" path="lib/tapestry-3.0.2.jar"/>
 	<classpathentry kind="lib" path="lib-standalone/jdic.jar"/>
 	<classpathentry kind="lib" path="lib/tacos-lib-20050421.jar"/>
+	<classpathentry kind="lib" path="lib/manLibrary-binary23Apr05.jar"/>
 	<classpathentry kind="output" path="context/WEB-INF/classes"/>
 </classpath>

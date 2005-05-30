@@ -95,7 +95,7 @@ public class Border extends BaseComponent
         // TODO The following should only be done if the category has subcategories, otherwise we're wasting space in the set.  For now though, the check requires a costly DB access so it is not performed.
         // Add the Category object to the tree state so that it expands node (similar to clicking the '+' button in the tree).
         final Set treeState = v.getTreeState();
-        treeState.add(new Integer(id));
+        treeState.add(id);
         
         // Redirect to the ViewBookmarks page to view the bookmarks in this category.
         cycle.activate("ViewBookmarks");
